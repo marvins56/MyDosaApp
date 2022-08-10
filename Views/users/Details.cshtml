@@ -1,0 +1,90 @@
+﻿@model StudentAffiairs.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Passcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Passcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Campus_Branches.Campus_branch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cours.courseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cours.courseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.semester.Semester_taken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.semester.Semester_taken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserLocation.From_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserLocation.From_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year.yearName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year.yearName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AccessNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

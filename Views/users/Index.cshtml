@@ -1,0 +1,81 @@
+﻿@model IEnumerable<StudentAffiairs.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccessNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cours.courseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.semester.Semester_taken)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Year.yearName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Passcode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Campus_Branches.Campus_branch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cours.courseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.semester.Semester_taken)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Passcode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.AccessNumber }) |
+            @Html.ActionLink("Details", "Details", new { id = item.AccessNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.AccessNumber })
+        </td>
+    </tr>
+}
+
+</table>
