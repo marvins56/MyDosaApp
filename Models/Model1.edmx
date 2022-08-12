@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MyDosa_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MyDosa_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Campus_Branches">
           <Key>
             <PropertyRef Name="campus_id" />
@@ -28,16 +28,15 @@
           <Property Name="Guest_email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Passcode" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Inquiry">
+        <EntityType Name="Inquiries">
           <Key>
             <PropertyRef Name="Inquirery_id" />
           </Key>
           <Property Name="Inquirery_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="inquirry" Type="varchar(max)" Nullable="false" />
+          <Property Name="Dateposteed" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Logs">
           <Key>
             <PropertyRef Name="user_id" />
@@ -51,14 +50,23 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <Property Name="TimeAccessed" Type="time" Precision="7" />
           <Property Name="LastSeenTime" Type="time" Precision="7" />
         </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Inquirery_id" Type="int" Nullable="false" />
+          <Property Name="Response" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DatetimeOfReply" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="Role_id" />
           </Key>
           <Property Name="Role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role1" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="semester">
+        <EntityType Name="semesters">
           <Key>
             <PropertyRef Name="sem_id" />
           </Key>
@@ -79,7 +87,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Passcode" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="UserLocation">
+        <EntityType Name="UserLocations">
           <Key>
             <PropertyRef Name="AccessNumber" />
           </Key>
@@ -90,7 +98,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <Property Name="Estimated_Arrival_time" Type="time" Precision="7" Nullable="false" />
           <Property Name="Set_Off_Time" Type="time" Precision="7" Nullable="false" />
         </EntityType>
-        <EntityType Name="Userrole">
+        <EntityType Name="Userroles">
           <Key>
             <PropertyRef Name="userroleid" />
           </Key>
@@ -98,7 +106,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <Property Name="AccessNo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="userroleid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <EntityType Name="Year">
+        <EntityType Name="Years">
           <Key>
             <PropertyRef Name="Year_id" />
           </Key>
@@ -129,23 +137,35 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_response">
+          <End Role="Inquiries" Type="Self.Inquiries" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inquiries">
+              <PropertyRef Name="Inquirery_id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="Inquirery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rolesz">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Userrole" Type="Self.Userrole" Multiplicity="*" />
+          <End Role="Userroles" Type="Self.Userroles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="Role_id" />
             </Principal>
-            <Dependent Role="Userrole">
+            <Dependent Role="Userroles">
               <PropertyRef Name="Roleid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_sem_id">
-          <End Role="semester" Type="Self.semester" Multiplicity="1" />
+          <End Role="semesters" Type="Self.semesters" Multiplicity="1" />
           <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="semester">
+            <Principal Role="semesters">
               <PropertyRef Name="sem_id" />
             </Principal>
             <Dependent Role="Students">
@@ -155,33 +175,33 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
         </Association>
         <Association Name="FK_UserLocation">
           <End Role="Students" Type="Self.Students" Multiplicity="1" />
-          <End Role="UserLocation" Type="Self.UserLocation" Multiplicity="0..1" />
+          <End Role="UserLocations" Type="Self.UserLocations" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Students">
               <PropertyRef Name="AccessNumber" />
             </Principal>
-            <Dependent Role="UserLocation">
+            <Dependent Role="UserLocations">
               <PropertyRef Name="AccessNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_users">
           <End Role="Students" Type="Self.Students" Multiplicity="1" />
-          <End Role="Userrole" Type="Self.Userrole" Multiplicity="*" />
+          <End Role="Userroles" Type="Self.Userroles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Students">
               <PropertyRef Name="AccessNumber" />
             </Principal>
-            <Dependent Role="Userrole">
+            <Dependent Role="Userroles">
               <PropertyRef Name="AccessNo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Year_id">
-          <End Role="Year" Type="Self.Year" Multiplicity="1" />
+          <End Role="Years" Type="Self.Years" Multiplicity="1" />
           <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Year">
+            <Principal Role="Years">
               <PropertyRef Name="Year_id" />
             </Principal>
             <Dependent Role="Students">
@@ -193,24 +213,15 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <EntitySet Name="Campus_Branches" EntityType="Self.Campus_Branches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Inquiry" EntityType="Self.Inquiry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inquiries" EntityType="Self.Inquiries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="semester" EntityType="Self.semester" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="semesters" EntityType="Self.semesters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserLocation" EntityType="Self.UserLocation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Userrole" EntityType="Self.Userrole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Year" EntityType="Self.Year" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Logs" EntityType="Self.Logs" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Logs].[user_id] AS [user_id], 
-    [Logs].[Access_No] AS [Access_No], 
-    [Logs].[visitDate] AS [visitDate], 
-    [Logs].[IpAdrress] AS [IpAdrress], 
-    [Logs].[DeviceUsed] AS [DeviceUsed], 
-    [Logs].[TimeAccessed] AS [TimeAccessed], 
-    [Logs].[LastSeenTime] AS [LastSeenTime]
-    FROM [dbo].[Logs] AS [Logs]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="UserLocations" EntityType="Self.UserLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Userroles" EntityType="Self.Userroles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Years" EntityType="Self.Years" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_campus_id" Association="Self.FK_campus_id">
             <End Role="Campus_Branches" EntitySet="Campus_Branches" />
             <End Role="Students" EntitySet="Students" />
@@ -219,29 +230,32 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
             <End Role="Courses" EntitySet="Courses" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
+          <AssociationSet Name="FK_response" Association="Self.FK_response">
+            <End Role="Inquiries" EntitySet="Inquiries" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
           <AssociationSet Name="FK_rolesz" Association="Self.FK_rolesz">
             <End Role="Roles" EntitySet="Roles" />
-            <End Role="Userrole" EntitySet="Userrole" />
+            <End Role="Userroles" EntitySet="Userroles" />
           </AssociationSet>
           <AssociationSet Name="FK_sem_id" Association="Self.FK_sem_id">
-            <End Role="semester" EntitySet="semester" />
+            <End Role="semesters" EntitySet="semesters" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
           <AssociationSet Name="FK_UserLocation" Association="Self.FK_UserLocation">
             <End Role="Students" EntitySet="Students" />
-            <End Role="UserLocation" EntitySet="UserLocation" />
+            <End Role="UserLocations" EntitySet="UserLocations" />
           </AssociationSet>
           <AssociationSet Name="FK_users" Association="Self.FK_users">
             <End Role="Students" EntitySet="Students" />
-            <End Role="Userrole" EntitySet="Userrole" />
+            <End Role="Userroles" EntitySet="Userroles" />
           </AssociationSet>
           <AssociationSet Name="FK_Year_id" Association="Self.FK_Year_id">
-            <End Role="Year" EntitySet="Year" />
+            <End Role="Years" EntitySet="Years" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyDosa_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -277,6 +291,21 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <Property Name="Inquirery_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="inquirry" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dateposteed" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Responses" Relationship="MyDosa_dbModel.FK_response" FromRole="Inquiry" ToRole="Response" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="Access_No" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="Access_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="visitDate" Type="DateTime" Precision="3" />
+          <Property Name="IpAdrress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceUsed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeAccessed" Type="Time" Precision="7" />
+          <Property Name="LastSeenTime" Type="Time" Precision="7" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -284,7 +313,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           </Key>
           <Property Name="Role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Role1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Userroles" Relationship="Self.FK_rolesz" FromRole="Roles" ToRole="Userrole" />
+          <NavigationProperty Name="Userroles" Relationship="Self.FK_rolesz" FromRole="Roles" ToRole="Userroles" />
         </EntityType>
         <EntityType Name="semester">
           <Key>
@@ -292,7 +321,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           </Key>
           <Property Name="sem_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Semester_taken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_sem_id" FromRole="semester" ToRole="Students" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_sem_id" FromRole="semesters" ToRole="Students" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -309,10 +338,10 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <Property Name="Passcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Campus_Branches" Relationship="Self.FK_campus_id" FromRole="Students" ToRole="Campus_Branches" />
           <NavigationProperty Name="Cours" Relationship="Self.FK_CourseCode" FromRole="Students" ToRole="Courses" />
-          <NavigationProperty Name="semester" Relationship="Self.FK_sem_id" FromRole="Students" ToRole="semester" />
-          <NavigationProperty Name="UserLocation" Relationship="Self.FK_UserLocation" FromRole="Students" ToRole="UserLocation" />
-          <NavigationProperty Name="Userroles" Relationship="Self.FK_users" FromRole="Students" ToRole="Userrole" />
-          <NavigationProperty Name="Year" Relationship="Self.FK_Year_id" FromRole="Students" ToRole="Year" />
+          <NavigationProperty Name="semester" Relationship="Self.FK_sem_id" FromRole="Students" ToRole="semesters" />
+          <NavigationProperty Name="UserLocation" Relationship="Self.FK_UserLocation" FromRole="Students" ToRole="UserLocations" />
+          <NavigationProperty Name="Userroles" Relationship="Self.FK_users" FromRole="Students" ToRole="Userroles" />
+          <NavigationProperty Name="Year" Relationship="Self.FK_Year_id" FromRole="Students" ToRole="Years" />
         </EntityType>
         <EntityType Name="UserLocation">
           <Key>
@@ -324,7 +353,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <Property Name="Distance" Type="Int32" />
           <Property Name="Estimated_Arrival_time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Set_Off_Time" Type="Time" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_UserLocation" FromRole="UserLocation" ToRole="Students" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_UserLocation" FromRole="UserLocations" ToRole="Students" />
         </EntityType>
         <EntityType Name="Userrole">
           <Key>
@@ -333,8 +362,8 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <Property Name="Roleid" Type="Int32" Nullable="false" />
           <Property Name="AccessNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="userroleid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_rolesz" FromRole="Userrole" ToRole="Roles" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_users" FromRole="Userrole" ToRole="Students" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_rolesz" FromRole="Userroles" ToRole="Roles" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_users" FromRole="Userroles" ToRole="Students" />
         </EntityType>
         <EntityType Name="Year">
           <Key>
@@ -342,20 +371,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           </Key>
           <Property Name="Year_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="yearName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_Year_id" FromRole="Year" ToRole="Students" />
-        </EntityType>
-        <EntityType Name="Log">
-          <Key>
-            <PropertyRef Name="user_id" />
-            <PropertyRef Name="Access_No" />
-          </Key>
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="Access_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="visitDate" Type="DateTime" Precision="3" />
-          <Property Name="IpAdrress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceUsed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TimeAccessed" Type="Time" Precision="7" />
-          <Property Name="LastSeenTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Year_id" FromRole="Years" ToRole="Students" />
         </EntityType>
         <Association Name="FK_campus_id">
           <End Role="Campus_Branches" Type="Self.Campus_Branches" Multiplicity="1" />
@@ -383,21 +399,21 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
         </Association>
         <Association Name="FK_rolesz">
           <End Role="Roles" Type="Self.Role" Multiplicity="1" />
-          <End Role="Userrole" Type="Self.Userrole" Multiplicity="*" />
+          <End Role="Userroles" Type="Self.Userrole" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="Role_id" />
             </Principal>
-            <Dependent Role="Userrole">
+            <Dependent Role="Userroles">
               <PropertyRef Name="Roleid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_sem_id">
-          <End Role="semester" Type="Self.semester" Multiplicity="1" />
+          <End Role="semesters" Type="Self.semester" Multiplicity="1" />
           <End Role="Students" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="semester">
+            <Principal Role="semesters">
               <PropertyRef Name="sem_id" />
             </Principal>
             <Dependent Role="Students">
@@ -407,33 +423,33 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
         </Association>
         <Association Name="FK_UserLocation">
           <End Role="Students" Type="Self.Student" Multiplicity="1" />
-          <End Role="UserLocation" Type="Self.UserLocation" Multiplicity="0..1" />
+          <End Role="UserLocations" Type="Self.UserLocation" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Students">
               <PropertyRef Name="AccessNumber" />
             </Principal>
-            <Dependent Role="UserLocation">
+            <Dependent Role="UserLocations">
               <PropertyRef Name="AccessNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_users">
           <End Role="Students" Type="Self.Student" Multiplicity="1" />
-          <End Role="Userrole" Type="Self.Userrole" Multiplicity="*" />
+          <End Role="Userroles" Type="Self.Userrole" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Students">
               <PropertyRef Name="AccessNumber" />
             </Principal>
-            <Dependent Role="Userrole">
+            <Dependent Role="Userroles">
               <PropertyRef Name="AccessNo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Year_id">
-          <End Role="Year" Type="Self.Year" Multiplicity="1" />
+          <End Role="Years" Type="Self.Year" Multiplicity="1" />
           <End Role="Students" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Year">
+            <Principal Role="Years">
               <PropertyRef Name="Year_id" />
             </Principal>
             <Dependent Role="Students">
@@ -446,13 +462,13 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           <EntitySet Name="Courses" EntityType="Self.Cours" />
           <EntitySet Name="Guests" EntityType="Self.Guest" />
           <EntitySet Name="Inquiries" EntityType="Self.Inquiry" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="semesters" EntityType="Self.semester" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="UserLocations" EntityType="Self.UserLocation" />
           <EntitySet Name="Userroles" EntityType="Self.Userrole" />
           <EntitySet Name="Years" EntityType="Self.Year" />
-          <EntitySet Name="Logs" EntityType="Self.Log" />
           <AssociationSet Name="FK_campus_id" Association="Self.FK_campus_id">
             <End Role="Campus_Branches" EntitySet="Campus_Branches" />
             <End Role="Students" EntitySet="Students" />
@@ -463,25 +479,52 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           </AssociationSet>
           <AssociationSet Name="FK_rolesz" Association="Self.FK_rolesz">
             <End Role="Roles" EntitySet="Roles" />
-            <End Role="Userrole" EntitySet="Userroles" />
+            <End Role="Userroles" EntitySet="Userroles" />
           </AssociationSet>
           <AssociationSet Name="FK_sem_id" Association="Self.FK_sem_id">
-            <End Role="semester" EntitySet="semesters" />
+            <End Role="semesters" EntitySet="semesters" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
           <AssociationSet Name="FK_UserLocation" Association="Self.FK_UserLocation">
             <End Role="Students" EntitySet="Students" />
-            <End Role="UserLocation" EntitySet="UserLocations" />
+            <End Role="UserLocations" EntitySet="UserLocations" />
           </AssociationSet>
           <AssociationSet Name="FK_users" Association="Self.FK_users">
             <End Role="Students" EntitySet="Students" />
-            <End Role="Userrole" EntitySet="Userroles" />
+            <End Role="Userroles" EntitySet="Userroles" />
           </AssociationSet>
           <AssociationSet Name="FK_Year_id" Association="Self.FK_Year_id">
-            <End Role="Year" EntitySet="Years" />
+            <End Role="Years" EntitySet="Years" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
+          <EntitySet Name="Responses" EntityType="MyDosa_dbModel.Response" />
+          <AssociationSet Name="FK_response" Association="MyDosa_dbModel.FK_response">
+            <End Role="Inquiry" EntitySet="Inquiries" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Inquirery_id" Type="Int32" Nullable="false" />
+          <Property Name="Response1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatetimeOfReply" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Inquiry" Relationship="MyDosa_dbModel.FK_response" FromRole="Response" ToRole="Inquiry" />
+        </EntityType>
+        <Association Name="FK_response">
+          <End Type="MyDosa_dbModel.Inquiry" Role="Inquiry" Multiplicity="1" />
+          <End Type="MyDosa_dbModel.Response" Role="Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inquiry">
+              <PropertyRef Name="Inquirery_id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="Inquirery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -516,10 +559,24 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           </EntitySetMapping>
           <EntitySetMapping Name="Inquiries">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Inquiry">
-              <MappingFragment StoreEntitySet="Inquiry">
+              <MappingFragment StoreEntitySet="Inquiries">
+                <ScalarProperty Name="Dateposteed" ColumnName="Dateposteed" />
                 <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="inquirry" ColumnName="inquirry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="Access_No" ColumnName="Access_No" />
+                <ScalarProperty Name="visitDate" ColumnName="visitDate" />
+                <ScalarProperty Name="IpAdrress" ColumnName="IpAdrress" />
+                <ScalarProperty Name="DeviceUsed" ColumnName="DeviceUsed" />
+                <ScalarProperty Name="TimeAccessed" ColumnName="TimeAccessed" />
+                <ScalarProperty Name="LastSeenTime" ColumnName="LastSeenTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -527,13 +584,13 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
             <EntityTypeMapping TypeName="MyDosa_dbModel.Role">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="Role_id" ColumnName="Role_id" />
-                <ScalarProperty Name="Role1" ColumnName="Role" />
+                <ScalarProperty Name="Role1" ColumnName="Role1" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="semesters">
             <EntityTypeMapping TypeName="MyDosa_dbModel.semester">
-              <MappingFragment StoreEntitySet="semester">
+              <MappingFragment StoreEntitySet="semesters">
                 <ScalarProperty Name="sem_id" ColumnName="sem_id" />
                 <ScalarProperty Name="Semester_taken" ColumnName="Semester_taken" />
               </MappingFragment>
@@ -556,7 +613,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           </EntitySetMapping>
           <EntitySetMapping Name="UserLocations">
             <EntityTypeMapping TypeName="MyDosa_dbModel.UserLocation">
-              <MappingFragment StoreEntitySet="UserLocation">
+              <MappingFragment StoreEntitySet="UserLocations">
                 <ScalarProperty Name="AccessNumber" ColumnName="AccessNumber" />
                 <ScalarProperty Name="From_Address" ColumnName="From_Address" />
                 <ScalarProperty Name="To_Adddress" ColumnName="To_Adddress" />
@@ -568,7 +625,7 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           </EntitySetMapping>
           <EntitySetMapping Name="Userroles">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Userrole">
-              <MappingFragment StoreEntitySet="Userrole">
+              <MappingFragment StoreEntitySet="Userroles">
                 <ScalarProperty Name="Roleid" ColumnName="Roleid" />
                 <ScalarProperty Name="AccessNo" ColumnName="AccessNo" />
                 <ScalarProperty Name="userroleid" ColumnName="userroleid" />
@@ -577,22 +634,19 @@ warning 6002: The table/view 'MyDosa_db.dbo.Logs' does not have a primary key de
           </EntitySetMapping>
           <EntitySetMapping Name="Years">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Year">
-              <MappingFragment StoreEntitySet="Year">
+              <MappingFragment StoreEntitySet="Years">
                 <ScalarProperty Name="Year_id" ColumnName="Year_id" />
                 <ScalarProperty Name="yearName" ColumnName="yearName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Logs">
-            <EntityTypeMapping TypeName="MyDosa_dbModel.Log">
-              <MappingFragment StoreEntitySet="Logs">
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="Access_No" ColumnName="Access_No" />
-                <ScalarProperty Name="visitDate" ColumnName="visitDate" />
-                <ScalarProperty Name="IpAdrress" ColumnName="IpAdrress" />
-                <ScalarProperty Name="DeviceUsed" ColumnName="DeviceUsed" />
-                <ScalarProperty Name="TimeAccessed" ColumnName="TimeAccessed" />
-                <ScalarProperty Name="LastSeenTime" ColumnName="LastSeenTime" />
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Response">
+              <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="DatetimeOfReply" ColumnName="DatetimeOfReply" />
+                <ScalarProperty Name="Response1" ColumnName="Response" />
+                <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

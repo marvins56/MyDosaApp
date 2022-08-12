@@ -29,12 +29,13 @@ namespace StudentAffiairs.Models
         public virtual DbSet<Cours> Courses { get; set; }
         public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<Inquiry> Inquiries { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<semester> semesters { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<UserLocation> UserLocations { get; set; }
         public virtual DbSet<Userrole> Userroles { get; set; }
         public virtual DbSet<Year> Years { get; set; }
-        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Response> Responses { get; set; }
     }
 }

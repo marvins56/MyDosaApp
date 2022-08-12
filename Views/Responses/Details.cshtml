@@ -1,0 +1,42 @@
+﻿@model StudentAffiairs.Models.Response
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Response</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Response1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Response1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatetimeOfReply)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatetimeOfReply)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inquiry.inquirry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inquiry.inquirry)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ResponseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

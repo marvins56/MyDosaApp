@@ -1,41 +1,92 @@
 ﻿@model StudentAffiairs.Models.Student
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "lOGIN";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>StudentAffairs DOSA</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/Auth/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/Auth/css/style.css">
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
 
-<h2>Login</h2>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
+
+    @if (TempData["logineror"] != null)
+    {
+        <script>
+     swal({
+        title: "ERROR!",
+  text: "@TempData["logineror"]",
+  icon: "error"
+        });</script>
+    }
+
+<div class="main">
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Student</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccessNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AccessNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AccessNumber, "", new { @class = "text-danger" })
+    @using (Html.BeginForm("login", "Users", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="~/Auth/images/signin-image.jpg" alt="sing up image"></figure>
+                        <a href="@Url.Action("SelfRegister","Users")" class="signup-image-link">Create an account</a>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">SIGN IN</h2>
+                        <div class="register-form" id="register-form">
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name "></i></label>
+                                @Html.EditorFor(model => model.AccessNumber, new { htmlAttributes = new { @class = "", Placeholder = "Access Number" } })
+                                @Html.ValidationMessageFor(model => model.AccessNumber, "", new { @class = "text-danger" })
+                            </div>
+
+
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="btn btn-primary w-100" value="sign in" />
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+    <!-- JS -->
+    <script src="~/Auth/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Auth/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   
+</body>
+</html>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

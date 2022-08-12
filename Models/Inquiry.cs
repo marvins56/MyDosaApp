@@ -14,8 +14,18 @@ namespace StudentAffiairs.Models
     
     public partial class Inquiry
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Inquiry()
+        {
+            this.Responses = new HashSet<Response>();
+        }
+    
         public int Inquirery_id { get; set; }
         public int UserId { get; set; }
         public string inquirry { get; set; }
+        public System.DateTime Dateposteed { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Response> Responses { get; set; }
     }
 }

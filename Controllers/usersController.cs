@@ -21,6 +21,16 @@ namespace StudentAffiairs.Controllers
             var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
             return View(students.ToList());
         }
+        public ActionResult Users()
+        {
+            var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
+            return View(students.ToList());
+        }
+        public ActionResult UserInfo()
+        {
+            var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
+            return View(students.ToList());
+        }
 
         // GET: users/Details/5
         public ActionResult Details(string id)
@@ -70,63 +80,6 @@ namespace StudentAffiairs.Controllers
             return View(student);
         }
 
-        // GET: users/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.campus_id = new SelectList(db.Campus_Branches, "campus_id", "Campus_branch", student.campus_id);
-            ViewBag.Course_code = new SelectList(db.Courses, "Course_code", "courseName", student.Course_code);
-            ViewBag.sem_id = new SelectList(db.semesters, "sem_id", "Semester_taken", student.sem_id);
-            ViewBag.AccessNumber = new SelectList(db.UserLocations, "AccessNumber", "From_Address", student.AccessNumber);
-            ViewBag.Year_Id = new SelectList(db.Years, "Year_id", "yearName", student.Year_Id);
-            return View(student);
-        }
-
-        // POST: users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AccessNumber,UserName,Email,Course_code,sem_id,Year_Id,campus_id,Country,Passcode")] Student student)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(student).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.campus_id = new SelectList(db.Campus_Branches, "campus_id", "Campus_branch", student.campus_id);
-            ViewBag.Course_code = new SelectList(db.Courses, "Course_code", "courseName", student.Course_code);
-            ViewBag.sem_id = new SelectList(db.semesters, "sem_id", "Semester_taken", student.sem_id);
-            ViewBag.AccessNumber = new SelectList(db.UserLocations, "AccessNumber", "From_Address", student.AccessNumber);
-            ViewBag.Year_Id = new SelectList(db.Years, "Year_id", "yearName", student.Year_Id);
-            return View(student);
-        }
-
-        // GET: users/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
-        }
-
-
         public ActionResult SelfRegister()
         {
             ViewBag.campus_id = new SelectList(db.Campus_Branches, "campus_id", "Campus_branch");
@@ -137,7 +90,6 @@ namespace StudentAffiairs.Controllers
             return View();
         }
         
-
         // POST: users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -191,7 +143,6 @@ namespace StudentAffiairs.Controllers
                     if (res > 0)
                     {
                         //SendEmailPasscode(Email, passcode);
-
                         TempData["success"] = "check Student Email for Security code.";
                         return RedirectToAction("verify");
                     }
@@ -204,7 +155,6 @@ namespace StudentAffiairs.Controllers
 
             return View();
         }
-
 
         [NonAction]
         public string Generate_Pass()
