@@ -868,7 +868,6 @@
     <Content Include="Template\scss\_theme\_common.scss" />
     <Content Include="Template\scss\_theme\_theme.scss" />
     <Content Include="Views\users\Users.cshtml" />
-    <Content Include="Views\Roles\modal.cshtml" />
     <Content Include="Views\users\UserInfo.cshtml" />
     <Content Include="Views\Responses\Create.cshtml" />
     <Content Include="Views\Responses\Delete.cshtml" />
