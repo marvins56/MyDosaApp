@@ -1,0 +1,8 @@
+﻿Run /Calendar.aspx to see scheduler in action.
+
+Files:
+/Calendar.aspx
+/Calendar.aspx.cs
+/CalendarEvent.cs
+/Data.ashx
+/Save.ashx

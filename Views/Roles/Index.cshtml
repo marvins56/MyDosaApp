@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="placeholderHere"></div>
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Hoverable Table rows -->
     <div class="card">
@@ -14,7 +15,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Role1)
                         </th>
-                        <th>  @Html.ActionLink("Creat Role", "Create")</th>
+                        <th> <button class="btn btn-primary" data-toggle="ajax-model" data-target="#addrole" data-url="@Url.Action("Create")">  ADD ROLE</button></th>
                         <th></th>
                     </tr>
                 </thead>

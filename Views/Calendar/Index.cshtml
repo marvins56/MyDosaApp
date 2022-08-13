@@ -1,0 +1,20 @@
+﻿
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <style>
+        body {
+            background-color: #eee;
+        }
+    </style>
+
+    <link href="~/Content/dhtmlxScheduler/dhtmlxscheduler-responsive.css" rel="stylesheet" />
+    <script src="~/Scripts/dhtmlxScheduler/dhtmlxscheduler-responsive.js"></script>
+
+    <div style="height:500px;width:100%;margin:0 auto">
+        <input type="button" value="Print to ical" onclick="@Model.ToICal(" /ExportToICal/Export", "data" )" />
+        <input type="button" value="Print to pdf" onclick=" @Model.ToPDF(" http://dhtmlxscheduler.appspot.com/export/pdf")" />
+        <input type="button" value="Print for a month" onclick=" @Model.ToPDFRange(" http://dhtmlxscheduler.appspot.com/export/pdf", 200)"/>
+        @Html.Raw(Model.Render())
+    </div>
+</div>
+

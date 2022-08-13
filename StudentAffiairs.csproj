@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('packages\NUnit.3.13.3\build\NUnit.props')" />
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -49,6 +50,9 @@
     <Reference Include="DHTMLX, Version=4.0.7963.42414, Culture=neutral, PublicKeyToken=53f24791214eb8ac, processorArchitecture=MSIL">
       <HintPath>packages\DHTMLX.Scheduler.NET.4.0.3\lib\DHTMLX.dll</HintPath>
     </Reference>
+    <Reference Include="DHTMLX.Scheduler.RecurringEvents, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DHTMLX.Scheduler.RecurringEvents.1.0.1\lib\netstandard2.0\DHTMLX.Scheduler.RecurringEvents.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -56,6 +60,9 @@
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -132,6 +139,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CalendarEvent.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\Campus_BranchesController.cs" />
     <Compile Include="Controllers\CoursController.cs" />
     <Compile Include="Controllers\GuestsController.cs" />
@@ -147,6 +160,9 @@
     <Compile Include="Controllers\YearsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Calender.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Campus_Branches.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -185,6 +201,7 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SchedulerModel.cs" />
     <Compile Include="Models\semester.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -231,11 +248,31 @@
     <Content Include="Auth\ucu logo.jpg" />
     <Content Include="Auth\vendor\jquery\jquery-ui.min.js" />
     <Content Include="Auth\vendor\jquery\jquery.min.js" />
+    <Content Include="Calendar.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_broadway.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_contrast_black.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_contrast_white.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_material.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_meadow.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_skyblue.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_terrace.css" />
+    <Content Include="Content\dhtmlxgantt\sources\dhtmlxgantt_broadway.css" />
+    <Content Include="Content\dhtmlxgantt\sources\dhtmlxgantt_contrast_black.css" />
+    <Content Include="Content\dhtmlxgantt\sources\dhtmlxgantt_contrast_white.css" />
+    <Content Include="Content\dhtmlxgantt\sources\dhtmlxgantt_material.css" />
+    <Content Include="Content\dhtmlxgantt\sources\dhtmlxgantt_meadow.css" />
+    <Content Include="Content\dhtmlxgantt\sources\dhtmlxgantt_skyblue.css" />
+    <Content Include="Content\dhtmlxgantt\sources\dhtmlxgantt_terrace.css" />
+    <Content Include="Content\dhtmlxScheduler\dhtmlxscheduler-responsive-classic.css" />
+    <Content Include="Content\dhtmlxScheduler\dhtmlxscheduler-responsive.css" />
     <Content Include="Content\loader.css" />
+    <Content Include="dhxscheduler.sample.mvc.responsive.readme.txt" />
+    <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
+    <Content Include="dhxscheduler.sample.webforms.readme.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -252,13 +289,6 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Auth\.sass-cache\21880c0ffe15753a53f8402e9f64e1077e071510\style.scssc" />
     <Content Include="Auth\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\extend.scssc" />
     <Content Include="Auth\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\fonts.scssc" />
@@ -352,7 +382,150 @@
     <Content Include="Auth\scss\layouts\main.scss" />
     <Content Include="Auth\scss\layouts\responsive.scss" />
     <Content Include="Auth\scss\style.scss" />
+    <Content Include="Save.ashx" />
+    <Content Include="Data.ashx" />
+    <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_click_drag.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_csp.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_drag_timeline.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_fullscreen.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_keyboard_navigation.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_marker.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_multiselect.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_quick_info.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_smart_rendering.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_tooltip.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_undo.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ar.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_be.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ca.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_cn.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_cs.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_da.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_de.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_el.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_es.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fa.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fi.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fr.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_he.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_hr.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_hu.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_id.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_it.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_jp.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_kr.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_nb.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_nl.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_no.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_pl.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_pt.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ro.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ru.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_si.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_sk.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_sv.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_tr.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ua.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ua.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_tr.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_sv.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_sk.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_si.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ru.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ro.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_pt.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_pl.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_no.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_nl.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_nb.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_kr.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_jp.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_it.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_id.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_hu.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_hr.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_he.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fr.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fi.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fa.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_es.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_el.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_de.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_da.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_cs.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_cn.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ca.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_be.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ar.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_undo.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_tooltip.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_smart_rendering.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_quick_info.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_multiselect.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_marker.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_keyboard_navigation.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_fullscreen.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_drag_timeline.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_csp.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_click_drag.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js.map" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="database file\MyDosa_db.bak" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\dhtmlxgantt.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_click_drag.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_csp.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_drag_timeline.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_fullscreen.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_keyboard_navigation.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_marker.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_multiselect.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_quick_info.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_smart_rendering.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_tooltip.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_undo.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ar.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_be.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ca.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cn.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cs.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_da.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_de.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_el.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_es.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fa.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fi.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fr.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_he.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_hr.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_hu.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_id.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_it.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_jp.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_kr.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nb.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nl.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_no.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pl.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pt.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ro.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ru.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_si.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sk.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sv.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_tr.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ua.js" />
+    <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler-responsive.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.css" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler_contrast_black.css" />
@@ -874,6 +1047,8 @@
     <Content Include="Views\Responses\Details.cshtml" />
     <Content Include="Views\Responses\Edit.cshtml" />
     <Content Include="Views\Responses\Index.cshtml" />
+    <Content Include="Views\Roles\_Roles.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -897,6 +1072,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\dhtmlxgantt\dhtmlxgantt.d.ts" />
     <TypeScriptCompile Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.d.ts" />
   </ItemGroup>
   <PropertyGroup>
@@ -934,6 +1110,7 @@
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit.3.13.3\build\NUnit.props'))" />
   </Target>
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

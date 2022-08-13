@@ -35,6 +35,7 @@
     <!-- Page CSS -->
     <!-- Helpers -->
     <script src="~/Template/assets/vendor/js/helpers.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
 
     <script src="~/Template/assets/js/config.js"></script>
@@ -52,7 +53,7 @@
                 <div class="app-brand demo">
                     <a href="@Url.Action("Index","Home")" class="app-brand-link">
 
-                        <img src="~/Auth/ucu logo.jpg" alt="Alternate Text"  class="app-brand-logo demo img-fluid" style="width:20%;border-radius:50%" />
+                        <img src="~/Auth/ucu logo.jpg" alt="Alternate Text" class="app-brand-logo demo img-fluid" style="width:20%;border-radius:50%" />
 
                         <span class="app-brand-text demo menu-text fw-bolder ms-2 text-capitalize">UCU DOSA</span>
                     </a>
@@ -121,19 +122,19 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="@Url.Action("UserInfo","Users")" class="menu-link" >
+                                <a href="@Url.Action("UserInfo","Users")" class="menu-link">
                                     <div data-i18n="Basic">Manage Users</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="@Url.Action("Users","Users")" class="menu-link" >
+                                <a href="@Url.Action("Users","Users")" class="menu-link">
                                     <div data-i18n="Basic">User Details</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                     <a href="@Url.Action("index","Calendar")" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                             <div data-i18n="Authentications">General calender</div>
                         </a>
@@ -146,7 +147,7 @@
                         </a>
 
                     </li>
-                    
+
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -154,7 +155,7 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="@Url.Action("Index","Campus_Branches")" class="menu-link" >
+                                <a href="@Url.Action("Index","Campus_Branches")" class="menu-link">
                                     <div data-i18n="Basic">Manage Campuses</div>
                                 </a>
                             </li>
@@ -165,13 +166,13 @@
                             </li>
 
                             <li class="menu-item">
-                                <a href="@Url.Action("Index","Userroles")" class="menu-link" >
+                                <a href="@Url.Action("Index","Userroles")" class="menu-link">
                                     <div data-i18n="Basic">Assign UserRoles</div>
                                 </a>
                             </li>
 
                             <li class="menu-item">
-                                <a href="@Url.Action("Index","Cours")" class="menu-link" >
+                                <a href="@Url.Action("Index","Cours")" class="menu-link">
                                     <div data-i18n="Basic">Manage courses</div>
                                 </a>
                             </li>
@@ -221,12 +222,12 @@
                         </div>
                         <!-- /Search -->
 
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">                 
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="~/Template/assets/img/avatars/1.png"  class="w-px-40 h-auto rounded-circle" />
+                                        <img src="~/Template/assets/img/avatars/1.png" class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -235,7 +236,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="~/Template/assets/img/avatars/1.png"  class="w-px-40 h-auto rounded-circle" />
+                                                        <img src="~/Template/assets/img/avatars/1.png" class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -260,7 +261,7 @@
                                             <span class="align-middle">Settings</span>
                                         </a>
                                     </li>
-                            
+
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>

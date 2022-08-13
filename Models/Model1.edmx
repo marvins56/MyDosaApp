@@ -5,6 +5,19 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MyDosa_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Calender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+          <Property Name="event_length" Type="bigint" Nullable="false" />
+          <Property Name="rec_type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="event_pid" Type="int" Nullable="false" />
+          <Property Name="userid" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Campus_Branches">
           <Key>
             <PropertyRef Name="campus_id" />
@@ -210,6 +223,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MyDosa_dbModelStoreContainer">
+          <EntitySet Name="Calender" EntityType="Self.Calender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Campus_Branches" EntityType="Self.Campus_Branches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
@@ -259,6 +273,19 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyDosa_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Calender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="event_length" Type="Int64" Nullable="false" />
+          <Property Name="rec_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="event_pid" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Campus_Branches">
           <Key>
             <PropertyRef Name="campus_id" />
@@ -292,7 +319,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="inquirry" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Dateposteed" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Responses" Relationship="MyDosa_dbModel.FK_response" FromRole="Inquiry" ToRole="Response" />
+          <NavigationProperty Name="Responses" Relationship="Self.FK_response" FromRole="Inquiries" ToRole="Response" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -306,6 +333,16 @@
           <Property Name="DeviceUsed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TimeAccessed" Type="Time" Precision="7" />
           <Property Name="LastSeenTime" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Inquirery_id" Type="Int32" Nullable="false" />
+          <Property Name="Response1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DatetimeOfReply" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Inquiry" Relationship="Self.FK_response" FromRole="Response" ToRole="Inquiries" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -397,6 +434,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_response">
+          <End Role="Inquiries" Type="Self.Inquiry" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inquiries">
+              <PropertyRef Name="Inquirery_id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="Inquirery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rolesz">
           <End Role="Roles" Type="Self.Role" Multiplicity="1" />
           <End Role="Userroles" Type="Self.Userrole" Multiplicity="*" />
@@ -457,12 +506,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MyDosa_dbEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MyDosa_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Calenders" EntityType="Self.Calender" />
           <EntitySet Name="Campus_Branches" EntityType="Self.Campus_Branches" />
           <EntitySet Name="Courses" EntityType="Self.Cours" />
           <EntitySet Name="Guests" EntityType="Self.Guest" />
           <EntitySet Name="Inquiries" EntityType="Self.Inquiry" />
           <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Responses" EntityType="Self.Response" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="semesters" EntityType="Self.semester" />
           <EntitySet Name="Students" EntityType="Self.Student" />
@@ -476,6 +527,10 @@
           <AssociationSet Name="FK_CourseCode" Association="Self.FK_CourseCode">
             <End Role="Courses" EntitySet="Courses" />
             <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_response" Association="Self.FK_response">
+            <End Role="Inquiries" EntitySet="Inquiries" />
+            <End Role="Response" EntitySet="Responses" />
           </AssociationSet>
           <AssociationSet Name="FK_rolesz" Association="Self.FK_rolesz">
             <End Role="Roles" EntitySet="Roles" />
@@ -497,40 +552,27 @@
             <End Role="Years" EntitySet="Years" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <EntitySet Name="Responses" EntityType="MyDosa_dbModel.Response" />
-          <AssociationSet Name="FK_response" Association="MyDosa_dbModel.FK_response">
-            <End Role="Inquiry" EntitySet="Inquiries" />
-            <End Role="Response" EntitySet="Responses" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Response">
-          <Key>
-            <PropertyRef Name="ResponseId" />
-          </Key>
-          <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Inquirery_id" Type="Int32" Nullable="false" />
-          <Property Name="Response1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DatetimeOfReply" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inquiry" Relationship="MyDosa_dbModel.FK_response" FromRole="Response" ToRole="Inquiry" />
-        </EntityType>
-        <Association Name="FK_response">
-          <End Type="MyDosa_dbModel.Inquiry" Role="Inquiry" Multiplicity="1" />
-          <End Type="MyDosa_dbModel.Response" Role="Response" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inquiry">
-              <PropertyRef Name="Inquirery_id" />
-            </Principal>
-            <Dependent Role="Response">
-              <PropertyRef Name="Inquirery_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MyDosa_dbModelStoreContainer" CdmEntityContainer="MyDosa_dbEntities2">
+        <EntityContainerMapping StorageEntityContainer="MyDosa_dbModelStoreContainer" CdmEntityContainer="MyDosa_dbEntities">
+          <EntitySetMapping Name="Calenders">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Calender">
+              <MappingFragment StoreEntitySet="Calender">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="event_length" ColumnName="event_length" />
+                <ScalarProperty Name="rec_type" ColumnName="rec_type" />
+                <ScalarProperty Name="event_pid" ColumnName="event_pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Campus_Branches">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Campus_Branches">
               <MappingFragment StoreEntitySet="Campus_Branches">
@@ -560,10 +602,10 @@
           <EntitySetMapping Name="Inquiries">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Inquiry">
               <MappingFragment StoreEntitySet="Inquiries">
-                <ScalarProperty Name="Dateposteed" ColumnName="Dateposteed" />
                 <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="inquirry" ColumnName="inquirry" />
+                <ScalarProperty Name="Dateposteed" ColumnName="Dateposteed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -577,6 +619,16 @@
                 <ScalarProperty Name="DeviceUsed" ColumnName="DeviceUsed" />
                 <ScalarProperty Name="TimeAccessed" ColumnName="TimeAccessed" />
                 <ScalarProperty Name="LastSeenTime" ColumnName="LastSeenTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Response">
+              <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+                <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
+                <ScalarProperty Name="Response1" ColumnName="Response" />
+                <ScalarProperty Name="DatetimeOfReply" ColumnName="DatetimeOfReply" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -637,16 +689,6 @@
               <MappingFragment StoreEntitySet="Years">
                 <ScalarProperty Name="Year_id" ColumnName="Year_id" />
                 <ScalarProperty Name="yearName" ColumnName="yearName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Responses">
-            <EntityTypeMapping TypeName="MyDosa_dbModel.Response">
-              <MappingFragment StoreEntitySet="Response">
-                <ScalarProperty Name="DatetimeOfReply" ColumnName="DatetimeOfReply" />
-                <ScalarProperty Name="Response1" ColumnName="Response" />
-                <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
-                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

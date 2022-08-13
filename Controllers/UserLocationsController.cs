@@ -12,7 +12,7 @@ namespace StudentAffiairs.Controllers
 {
     public class UserLocationsController : Controller
     {
-        private MyDosa_dbEntities2 db = new MyDosa_dbEntities2();
+        private MyDosa_dbEntities db = new MyDosa_dbEntities();
 
         // GET: UserLocations
         public ActionResult Index()
