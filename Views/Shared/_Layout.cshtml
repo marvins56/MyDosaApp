@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="~/Template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="~/Template/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="~/Content/loader.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Page CSS -->
     <!-- Helpers -->
     <script src="~/Template/assets/vendor/js/helpers.js"></script>
@@ -82,42 +84,44 @@
                     <!-- Layouts -->
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link  ">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <i class="fa-solid fa-calendar-check menu-icon " ></i>
+                            
                             <div data-i18n="Layouts">My Calender</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
                         <a href="@Url.Action("Create","Inquiries")" class="menu-link  ">
-                            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                            <i class="fa-solid fa-headset menu-icon"></i>
                             <div data-i18n="Account Settings">Make Inquiry</div>
                         </a>
 
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link  ">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <i class="fa-solid fa-file-zipper menu-icon"></i>
                             <div data-i18n="Authentications">My Travel Report</div>
                         </a>
 
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link  ">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <i class="fa-solid fa-comment-dots menu-icon"></i>
                             <div data-i18n="Authentications">Chat Forum</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link  ">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <i class="fa-solid fa-blender-phone menu-icon"></i>
                             <div data-i18n="Authentications">Contact us</div>
                         </a>
 
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <i class="fa-solid fa-users menu-icon"></i>
+                         
                             <div data-i18n="Authentications">Users </div>
                         </a>
                         <ul class="menu-sub">
@@ -135,21 +139,29 @@
                     </li>
                     <li class="menu-item">
                         <a href="@Url.Action("Index","Calendar")" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <i class="fa-solid fa-calendar-check menu-icon "></i>
                             <div data-i18n="Basic">General Calender</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="@Url.Action("index","Inquiries")" class="menu-link  ">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <i class="fa-solid fa-headset menu-icon"></i>
                             <div data-i18n="Authentications">General inquries</div>
+                        </a>
+
+                    </li>
+                    <li class="menu-item">
+                        <a href="@Url.Action("index","Responses")" class="menu-link  ">
+                            <i class="fa-solid fa-phone-volume menu-icon"></i>
+                            <div data-i18n="Authentications">General responses</div>
                         </a>
 
                     </li>
 
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                        
+                            <i class="fa-solid fa-gears menu-icon "></i>
                             <div data-i18n="Authentications">System  Settings</div>
                         </a>
                         <ul class="menu-sub">
@@ -189,7 +201,7 @@
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <i class="fa-solid fa-sliders menu-icon"></i>
                             <div data-i18n="Authentications">System Logs</div>
                         </a>
                     </li>
@@ -309,7 +321,7 @@
     <!-- build:js assets/vendor/js/core.js -->
     <!-- Footer with components -->
     <section id="component-footer">
-        <h5 class="pb-1 mb-4">Footer with Elements</h5>
+       
 
         <footer class="footer bg-light">
             <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">

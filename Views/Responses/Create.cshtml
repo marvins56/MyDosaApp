@@ -4,108 +4,114 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<style>
+    body, .row {
+        text-align: center;
+    }
 
-<section onload="#modalCenter"></section>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    .modal-body {
+        display: inline-block;
+    }
+</style>
 
-    <div class="form-horizontal">
-        <h4>Response</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Inquirery_id, "Inquirery_id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Inquirery_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Inquirery_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="container-xxl flex-grow-1 container-p-y">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Response1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Response1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Response1, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="row mb-5">
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card">
+                <div class="card-header">RESPONSE CENTER</div>
+                <div class="card-body">
 
+                    <p class="card-text">
+                        Click button incase modal does not apear
+                    </p>
+                    <button type="button"
+                            class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalCenter">
 
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                        RESPOND TO INQUIRY
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-<!-- Vertically Centered Modal -->
-<div class="col-lg-4 col-md-6">
-    <small class="text-light fw-semibold">Vertically centered</small>
-    <div class="mt-3">
-        <!-- Button trigger modal -->
-        @*<button type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#modalCenter">
-            Launch modal
-        </button>*@
 
-        <!-- Modal -->
-        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
-                        <button type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Name</label>
-                                <input type="text"
-                                       id="nameWithTitle"
-                                       class="form-control"
-                                       placeholder="Enter Name" />
-                            </div>
+
+
+    <!-- Vertically Centered Modal -->
+    <div class="col-lg-4 col-md-6">
+   
+        <div class="mt-3">
+
+            <div class="modal fade in" id="modalCenter" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCenterTitle">#</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                         </div>
-                        <div class="row g-2">
-                            <div class="col mb-0">
-                                <label for="emailWithTitle" class="form-label">Email</label>
-                                <input type="text"
-                                       id="emailWithTitle"
-                                       class="form-control"
-                                       placeholder="xxxx@xxx.xx" />
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="modal-body text-center" style="align-items:center;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card md-12">
+                                            <h5 class="card-header">RESPONSE CENTER</h5>
+                                            <div class="card-body demo-vertical-spacing demo-only-element">
+                                                <small class="text-light fw-semibold d-block">SELECT INQUIRY</small>
+
+                                                <div class="input-group input-group-merge">
+                                                    @Html.DropDownList("Inquirery_id", null, htmlAttributes: new
+                                                    {
+                                                        @class = "form-select",
+                                                        id = "exampleFormControlSelect1",@*aria-label = "Default select example"*@})
+                                                    @Html.ValidationMessageFor(model => model.Inquirery_id, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <small class="text-light fw-semibold d-block pt-3">
+                                                    TYPE RESPONSE HERE
+                                                </small>
+
+                                                <div>
+                                                    <textarea class="form-control" name="Response1" id="exampleFormControlTextarea1" rows="5 "></textarea>
+                                                    @Html.ValidationMessageFor(model => model.Response1, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
-                            <div class="col mb-0">
-                                <label for="dobWithTitle" class="form-label">DOB</label>
-                                <input type="text"
-                                       id="dobWithTitle"
-                                       class="form-control"
-                                       placeholder="DD / MM / YY" />
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <input type="submit" class="btn btn-primary" value="Save changes">
                             </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        }
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('#modalCenter').modal('show');
+        });
+    </script>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
