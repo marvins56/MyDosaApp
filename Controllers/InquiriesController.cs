@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using StudentAffiairs.Models;
 
 namespace StudentAffiairs.Controllers
@@ -15,11 +16,55 @@ namespace StudentAffiairs.Controllers
         private MyDosa_dbEntities db = new MyDosa_dbEntities();
 
         // GET: Inquiries
+        
         public ActionResult Index()
         {
+        //    var inquiryList = (from t in db.Inquiries
+        //                       join r in db.Responses on t.Inquirery_id equals r.Inquirery_id
+        //                       select new
+        //                       {
+        //                          Inquiry =  t.inquirry,
+        //                           Inquirery_id =  t.Inquirery_id,
+        //                           UserId = t.UserId,
+        //                           ResponseId =    r.ResponseId,
+        //                           Response1 = r.Response1,
+        //                           DatetimeOfReply =   r.DatetimeOfReply,
+        //                           Dateposteed = t.Dateposteed
+        //                       }).ToList();
+
             return View(db.Inquiries.ToList());
         }
+        public ActionResult userResponse(int id)
+        {
+            
+                var responseid = db.Responses.Where(a => a.Inquirery_id == id).FirstOrDefault();
+            var res = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.Response1).FirstOrDefault();
+            var date = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.DatetimeOfReply).FirstOrDefault();
+            if (responseid == null)
+            {
+                TempData["nullvalue"] = "RESPONSE PENDING";
+                return RedirectToAction("index");
+            }
+            else
+            {
+                TempData["values"] = "RESPONSE: " + res + " On " + date;
+                return RedirectToAction("index");
+            }
+           
+           
 
+        }
+        public ActionResult userInquiries(String id)
+        {
+            var myInquiries = db.Inquiries.Where(a => a.UserId == id).ToList();
+            if (myInquiries == null)
+            {
+                TempData["nullvalue"] = id +" Has NO INQUIRIES";
+                return RedirectToAction("index");
+            }
+          
+            return View(myInquiries);
+        }
         // GET: Inquiries/Details/5
         public ActionResult Details(int? id)
         {
@@ -46,10 +91,12 @@ namespace StudentAffiairs.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Inquirery_id,UserId,inquirry")] Inquiry inquiry)
+        public ActionResult Create([Bind(Include = "Inquirery_id,UserId,inquirry,Dateposteed")] Inquiry inquiry)
         {
             if (ModelState.IsValid)
             {
+                inquiry.UserId = "a90648";
+                inquiry.Dateposteed = DateTime.Now;
                 db.Inquiries.Add(inquiry);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +125,7 @@ namespace StudentAffiairs.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Inquirery_id,UserId,inquirry")] Inquiry inquiry)
+        public ActionResult Edit([Bind(Include = "Inquirery_id,UserId,inquirry,Dateposteed")] Inquiry inquiry)
         {
             if (ModelState.IsValid)
             {

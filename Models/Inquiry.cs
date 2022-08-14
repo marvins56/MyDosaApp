@@ -21,7 +21,7 @@ namespace StudentAffiairs.Models
         }
     
         public int Inquirery_id { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string inquirry { get; set; }
         public System.DateTime Dateposteed { get; set; }
     

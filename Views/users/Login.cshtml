@@ -4,6 +4,7 @@
     ViewBag.Title = "lOGIN";
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,22 @@
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+      .signup {
+            background-image: url('/Template/assets/UCU-Libray.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            opacity: 0.8;
+        }
+
+       
+    </style>
 </head>
+
 <body>
 
     @if (TempData["logineror"] != null)
@@ -32,45 +48,44 @@
   icon: "error"
         });</script>
     }
-
-<div class="main">
+<div class="main" style="height:500px; margin-top:-100px;">
 
 
     @using (Html.BeginForm("login", "Users", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
-        <!-- Sing in  Form -->
-        <section class="sign-in">
-            <div class="container">
-                <div class="signin-content">
-                    <div class="signin-image">
-                        <figure><img src="~/Auth/images/signin-image.jpg" alt="sing up image"></figure>
-                        <a href="@Url.Action("SelfRegister","Users")" class="signup-image-link">Create an account</a>
-                    </div>
 
-                    <div class="signin-form">
-                        <h2 class="form-title">SIGN IN</h2>
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">SELF REGISTER</h2>
+
                         <div class="register-form" id="register-form">
                             <div class="form-group">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                <label for="name"><i class="zmdi zmdi-account material-icons-name "></i></label>
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
+
                                 @Html.EditorFor(model => model.AccessNumber, new { htmlAttributes = new { @class = "", Placeholder = "Access Number" } })
                                 @Html.ValidationMessageFor(model => model.AccessNumber, "", new { @class = "text-danger" })
                             </div>
-
+                            
 
                             <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="btn btn-primary w-100" value="sign in" />
+                                <input type="submit" name="signup" id="signup" class="btn btn-primary w-100" value="sign Up" />
                             </div>
                         </div>
-                       
+                    </div>
+                    <div class="signin-image">
+                        <figure><img src="~/Auth/images/signin-image.jpg" alt="sing up image"></figure>
+                        <a href="@Url.Action("SelfRegister","Users")" class="signup-image-link">Create an account</a>
                     </div>
                 </div>
             </div>
         </section>
-
 
     }
 
@@ -82,12 +97,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-   
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 </body>
 </html>
 
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -13,9 +13,9 @@
           <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" Nullable="false" />
-          <Property Name="event_length" Type="bigint" Nullable="false" />
-          <Property Name="rec_type" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="event_pid" Type="int" Nullable="false" />
+          <Property Name="event_length" Type="bigint" />
+          <Property Name="rec_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="event_pid" Type="int" />
           <Property Name="userid" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Campus_Branches">
@@ -46,7 +46,7 @@
             <PropertyRef Name="Inquirery_id" />
           </Key>
           <Property Name="Inquirery_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="inquirry" Type="varchar(max)" Nullable="false" />
           <Property Name="Dateposteed" Type="datetime" Nullable="false" />
         </EntityType>
@@ -71,6 +71,7 @@
           <Property Name="Inquirery_id" Type="int" Nullable="false" />
           <Property Name="Response" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DatetimeOfReply" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="bit" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -281,9 +282,9 @@
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="event_length" Type="Int64" Nullable="false" />
-          <Property Name="rec_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="event_pid" Type="Int32" Nullable="false" />
+          <Property Name="event_length" Type="Int64" />
+          <Property Name="rec_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="event_pid" Type="Int32" />
           <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Campus_Branches">
@@ -316,7 +317,7 @@
             <PropertyRef Name="Inquirery_id" />
           </Key>
           <Property Name="Inquirery_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="inquirry" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Dateposteed" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Responses" Relationship="Self.FK_response" FromRole="Inquiries" ToRole="Response" />
@@ -343,6 +344,7 @@
           <Property Name="Response1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DatetimeOfReply" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Inquiry" Relationship="Self.FK_response" FromRole="Response" ToRole="Inquiries" />
+          <Property Name="status" Type="Boolean" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -562,7 +564,6 @@
           <EntitySetMapping Name="Calenders">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Calender">
               <MappingFragment StoreEntitySet="Calender">
-                <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
@@ -570,6 +571,7 @@
                 <ScalarProperty Name="event_length" ColumnName="event_length" />
                 <ScalarProperty Name="rec_type" ColumnName="rec_type" />
                 <ScalarProperty Name="event_pid" ColumnName="event_pid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -625,6 +627,7 @@
           <EntitySetMapping Name="Responses">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Response">
               <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
                 <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
                 <ScalarProperty Name="Response1" ColumnName="Response" />

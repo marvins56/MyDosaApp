@@ -10,6 +10,8 @@ using StudentAffiairs.Models;
 
 namespace StudentAffiairs.Controllers
 {
+    ////[Authorize]
+    [HandleError]
     public class Campus_BranchesController : Controller
     {
         private MyDosa_dbEntities db = new MyDosa_dbEntities();
@@ -41,9 +43,7 @@ namespace StudentAffiairs.Controllers
             return View();
         }
 
-        // POST: Campus_Branches/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "campus_id,Campus_branch")] Campus_Branches campus_Branches)
@@ -72,10 +72,6 @@ namespace StudentAffiairs.Controllers
             }
             return View(campus_Branches);
         }
-
-        // POST: Campus_Branches/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "campus_id,Campus_branch")] Campus_Branches campus_Branches)

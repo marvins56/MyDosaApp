@@ -18,6 +18,7 @@ namespace StudentAffiairs.Models
         public int Inquirery_id { get; set; }
         public string Response1 { get; set; }
         public System.DateTime DatetimeOfReply { get; set; }
+        public Nullable<bool> status { get; set; }
     
         public virtual Inquiry Inquiry { get; set; }
     }

@@ -147,6 +147,9 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\Campus_BranchesController.cs" />
     <Compile Include="Controllers\CoursController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ExportToICalController.cs" />
+    <Compile Include="Controllers\ExportToPDFController.cs" />
     <Compile Include="Controllers\GuestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InquiriesController.cs" />
@@ -472,6 +475,7 @@
     <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_csp.js.map" />
     <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_click_drag.js.map" />
     <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js.map" />
+    <Content Include="database file\MyDosa_db.bak" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -479,7 +483,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="database file\MyDosa_db.bak" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dhtmlxgantt\sources\dhtmlxgantt.js" />
     <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_click_drag.js" />
@@ -802,6 +805,8 @@
     <Content Include="Template\assets\js\ui-modals.js" />
     <Content Include="Template\assets\js\ui-popover.js" />
     <Content Include="Template\assets\js\ui-toasts.js" />
+    <Content Include="Template\assets\Section-of-UCU-campus.png" />
+    <Content Include="Template\assets\UCU-Libray.jpg" />
     <Content Include="Template\assets\vendor\css\core.css" />
     <Content Include="Template\assets\vendor\css\pages\page-account-settings.css" />
     <Content Include="Template\assets\vendor\css\pages\page-auth.css" />
@@ -1049,9 +1054,18 @@
     <Content Include="Views\Responses\Index.cshtml" />
     <Content Include="Views\Roles\_Roles.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Inquiries\Create.cshtml" />
+    <Content Include="Views\Inquiries\Delete.cshtml" />
+    <Content Include="Views\Inquiries\Details.cshtml" />
+    <Content Include="Views\Inquiries\Edit.cshtml" />
+    <Content Include="Views\Inquiries\Index.cshtml" />
+    <Content Include="Views\Inquiries\userResponse.cshtml" />
+    <Content Include="Views\Inquiries\userInquiries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\crud\" />
     <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>

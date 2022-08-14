@@ -18,9 +18,9 @@ namespace StudentAffiairs.Models
         public string Text { get; set; }
         public System.DateTime start_date { get; set; }
         public System.DateTime end_date { get; set; }
-        public long event_length { get; set; }
+        public Nullable<long> event_length { get; set; }
         public string rec_type { get; set; }
-        public int event_pid { get; set; }
+        public Nullable<int> event_pid { get; set; }
         public string userid { get; set; }
     }
 }

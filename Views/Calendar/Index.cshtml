@@ -1,4 +1,21 @@
-﻿
+﻿@if (TempData["success"] != null)
+{
+    <script>
+     swal({
+        title: "EXECUTION SUCCESSFUL!",
+  text: "@TempData["update"]",
+  icon: "success"
+        });</script>
+}
+@if (TempData["success"] != null)
+{
+    <script>
+     swal({
+         title: "EXECUTION ERROR!",
+  text: "@TempData["calendererror"]",
+  icon: "error"
+        });</script>
+}
 <div class="container-xxl flex-grow-1 container-p-y">
 
     <style>
@@ -11,9 +28,9 @@
     <script src="~/Scripts/dhtmlxScheduler/dhtmlxscheduler-responsive.js"></script>
 
     <div style="height:500px;width:100%;margin:0 auto">
-        <input type="button" value="Print to ical" onclick="@Model.ToICal(" /ExportToICal/Export", "data" )" />
-        <input type="button" value="Print to pdf" onclick=" @Model.ToPDF(" http://dhtmlxscheduler.appspot.com/export/pdf")" />
-        <input type="button" value="Print for a month" onclick=" @Model.ToPDFRange(" http://dhtmlxscheduler.appspot.com/export/pdf", 200)"/>
+        <!--<input type="button" value="Print to ical" onclick="@Model.ToICal(" /ExportToICal/Export", "data" )" />--> 
+        <input type="button" value="Print to pdf" onclick=" @Model.ToPDF(" https://dhtmlxscheduler.appspot.com/export/pdf")" />
+        @*<input type="button" value="Print for a month" onclick=" @Model.ToPDFRange(" https://dhtmlxscheduler.appspot.com/export/pdf", 200)"/>*@
         @Html.Raw(Model.Render())
     </div>
 </div>

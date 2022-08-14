@@ -11,6 +11,8 @@ using StudentAffiairs.Models;
 
 namespace StudentAffiairs.Controllers
 {
+    //[Authorize]
+    //[HandleError]
     public class usersController : Controller
     {
         private MyDosa_dbEntities db = new MyDosa_dbEntities();

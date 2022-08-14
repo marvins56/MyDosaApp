@@ -10,6 +10,8 @@ using StudentAffiairs.Models;
 
 namespace StudentAffiairs.Controllers
 {
+    //[Authorize]
+    [HandleError]
     public class ResponsesController : Controller
     {
         private MyDosa_dbEntities db = new MyDosa_dbEntities();
@@ -50,17 +52,39 @@ namespace StudentAffiairs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ResponseId,Inquirery_id,Response1,DatetimeOfReply")] Response response)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Responses.Add(response);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    var exixtsresponse = responseExixts(response.ResponseId);
+                    if (exixtsresponse)
+                    {
+                        TempData["responseexists"] = "PLEASE MAKE CHAGES TO THE PREVIOUS RESPONSE";
+                    }
+                    else
+                    {
+                        response.DatetimeOfReply = DateTime.Now;
+                        db.Responses.Add(response);
+                        db.SaveChanges();
+                    }
+
+                    return RedirectToAction("Index");
+                }
+            }catch(Exception e)
+            {
+                TempData["errorsaving"]  = e.Message;
             }
 
             ViewBag.Inquirery_id = new SelectList(db.Inquiries, "Inquirery_id", "inquirry", response.Inquirery_id);
             return View(response);
         }
-
+        [NonAction]
+        public bool responseExixts(int id)
+        {
+             var v = db.Responses.Where(a => a.ResponseId == id).FirstOrDefault();
+                return v != null;
+            
+        }
         // GET: Responses/Edit/5
         public ActionResult Edit(int? id)
         {

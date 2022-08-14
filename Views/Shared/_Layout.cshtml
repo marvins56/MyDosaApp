@@ -36,7 +36,7 @@
     <!-- Helpers -->
     <script src="~/Template/assets/vendor/js/helpers.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="~/Template/assets/js/config.js"></script>
 
@@ -88,7 +88,7 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link  ">
+                        <a href="@Url.Action("Create","Inquiries")" class="menu-link  ">
                             <i class="menu-icon tf-icons bx bx-dock-top"></i>
                             <div data-i18n="Account Settings">Make Inquiry</div>
                         </a>
@@ -134,14 +134,13 @@
                         </ul>
                     </li>
                     <li class="menu-item">
-                     <a href="@Url.Action("index","Calendar")" class="menu-link menu-toggle">
+                        <a href="@Url.Action("Index","Calendar")" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                            <div data-i18n="Authentications">General calender</div>
+                            <div data-i18n="Basic">General Calender</div>
                         </a>
-
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link  ">
+                        <a href="@Url.Action("index","Inquiries")" class="menu-link  ">
                             <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                             <div data-i18n="Authentications">General inquries</div>
                         </a>
@@ -308,6 +307,41 @@
     <!-- / Layout wrapper -->
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+    <!-- Footer with components -->
+    <section id="component-footer">
+        <h5 class="pb-1 mb-4">Footer with Elements</h5>
+
+        <footer class="footer bg-light">
+            <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+                <div>
+                    <a href="#"
+                     
+                       class="footer-text fw-bolder">UCU DEPARTMENT OF STUDENTS AFAIRS</a>
+                    &copy;
+                </div>
+                <div>
+                    <div class="dropdown dropup footer-link me-3">
+                        <button type="button"
+                                class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                        QICK LINKS
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-dollar"></i> USD</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-euro"></i> Euro</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-pound"></i> Pound</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-bitcoin"></i> Bitcoin</a>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle"></i> Logout</a>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <!--/ Footer with components -->
     <script>
         var showLoader = function (text) {
             $('#resultLoading').show();
@@ -340,7 +374,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    @Scripts.Render("~/bundles/jquery")
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 

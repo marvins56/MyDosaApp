@@ -1,0 +1,44 @@
+﻿@model StudentAffiairs.Models.Response
+
+@{
+    ViewBag.Title = "InquiryStatus";
+}
+
+<h2>InquiryStatus</h2>
+
+<div>
+    <h4>Response</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Response1)
+           
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.Response1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatetimeOfReply)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatetimeOfReply)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inquiry.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inquiry.UserId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+   
+</p>

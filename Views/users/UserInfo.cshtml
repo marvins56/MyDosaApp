@@ -3,6 +3,15 @@
 @{
     ViewBag.Title = "UserInfo";
 }
+@if (TempData["nullvalue"] != null)
+{
+    <script>
+     swal({
+        title: "PENDING",
+  text: "@TempData["nullvalue"]",
+  icon: "warning"
+        });</script>
+}
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Hoverable Table rows -->
     <div class="card">
@@ -11,7 +20,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th> 
+                        <th>
                             @Html.DisplayNameFor(model => model.AccessNumber)
                         </th>
                         <th>
@@ -46,8 +55,9 @@
                             </td>
 
                             <td>
+
                                 @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
-                                @Html.ActionLink("Report", "Details", new { id = item.AccessNumber })|
+                                <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.AccessNumber })">inquiries</a>
                                 @Html.ActionLink("Calender", "Details", new { id = item.AccessNumber })|
                                 @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
                                 @Html.ActionLink("location", "Details", new { id = item.AccessNumber })|
@@ -56,7 +66,7 @@
                             </td>
 
 
-                          
+
                         </tr>
                     }
 

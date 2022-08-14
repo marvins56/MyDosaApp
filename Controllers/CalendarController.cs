@@ -12,11 +12,15 @@ using DHTMLX.Scheduler.Controls;
 
 using StudentAffiairs.Models;
 using DHTMLX.Scheduler.Settings;
+using NUnit.Framework.Internal.Execution;
+using System.Threading.Tasks;
 
 namespace StudentAffiairs.Controllers
 {
+   
     public class CalendarController : Controller
     {
+        private MyDosa_dbEntities db = new MyDosa_dbEntities();
         public ActionResult Index()
         {
             //Being initialized in that way, scheduler will use CalendarController.Data as a the datasource and CalendarController.Save to process changes
@@ -92,28 +96,7 @@ namespace StudentAffiairs.Controllers
 
         public ContentResult Data()
         {
-            var data = new SchedulerAjaxData(
-                    new List<CalendarEvent>{ 
-                        new CalendarEvent{
-                            id = 1, 
-                            text = "Sample Event", 
-                            start_date = new DateTime(2012, 09, 03, 6, 00, 00), 
-                            end_date = new DateTime(2012, 09, 03, 8, 00, 00)
-                        },
-                        new CalendarEvent{
-                            id = 2, 
-                            text = "New Event", 
-                            start_date = new DateTime(2012, 09, 05, 9, 00, 00), 
-                            end_date = new DateTime(2012, 09, 05, 12, 00, 00)
-                        },
-                        new CalendarEvent{
-                            id = 3, 
-                            text = "Multiday Event", 
-                            start_date = new DateTime(2012, 09, 03, 10, 00, 00), 
-                            end_date = new DateTime(2012, 09, 10, 12, 00, 00)
-                        }
-                    }
-                );
+            var data = new SchedulerAjaxData(db.Calenders);
             return (ContentResult)data;
         }
 
@@ -123,29 +106,45 @@ namespace StudentAffiairs.Controllers
             
             try
             {
-                var changedEvent = (CalendarEvent)DHXEventsHelper.Bind(typeof(CalendarEvent), actionValues);
-
-     
-
+                var changedEvent = (Calender)DHXEventsHelper.Bind(typeof(Calender), actionValues);
+                  
                 switch (action.Type)
-                {
+                { 
                     case DataActionTypes.Insert:
                         //do insert
-                        // action.TargetId = changedEvent.id;//assign postoperational id
+                        changedEvent.userid = "A90648";
+                        db.Calenders.Add(changedEvent);
                         break;
                     case DataActionTypes.Delete:
                         //do delete
+                        changedEvent = db.Calenders.SingleOrDefault(ev => ev.Id == action.SourceId);
+                        db.Calenders.Remove(changedEvent);
+
                         break;
                     default:// "update"                          
-                        //do update
+                            //do update
+                        var eventToUdate = db.Calenders.SingleOrDefault(
+                          ev => ev.Id == action.SourceId);
+                        DHXEventsHelper.Update(eventToUdate, changedEvent, new List<string>() { "Id"});
                         break;
                 }
+                db.SaveChanges();
+                action.TargetId = changedEvent.Id;
+                TempData["update"] = "Operation Successfull";
             }
-            catch
+            catch(Exception e)
             {
                 action.Type = DataActionTypes.Error;
+                TempData["calendererror"] = e.Message;
             }
             return (ContentResult)new AjaxSaveResponse(action);
+        }
+        public ActionResult userCalender()
+        {
+            string id = "A90648";
+            var myCalendar = db.Calenders.Where(ev => ev.userid == id).ToList();
+            var resp = new SchedulerAjaxData(myCalendar);
+            return View(resp);
         }
         public ActionResult Export()
         {
