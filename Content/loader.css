@@ -123,3 +123,8 @@
         height: 5em;
     }
 }
+@media screen and (min-width: 1200px) {
+    .mobile-nav {
+        display: none;
+    }
+}

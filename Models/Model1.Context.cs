@@ -38,5 +38,7 @@ namespace StudentAffiairs.Models
         public virtual DbSet<UserLocation> UserLocations { get; set; }
         public virtual DbSet<Userrole> Userroles { get; set; }
         public virtual DbSet<Year> Years { get; set; }
+
+        public System.Data.Entity.DbSet<StudentAffiairs.CalendarEvent> CalendarEvents { get; set; }
     }
 }

@@ -272,6 +272,7 @@
     <Content Include="Content\dhtmlxgantt\sources\dhtmlxgantt_terrace.css" />
     <Content Include="Content\dhtmlxScheduler\dhtmlxscheduler-responsive-classic.css" />
     <Content Include="Content\dhtmlxScheduler\dhtmlxscheduler-responsive.css" />
+    <Content Include="Content\navvar.html" />
     <Content Include="Content\loader.css" />
     <Content Include="dhxscheduler.sample.mvc.responsive.readme.txt" />
     <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
@@ -765,10 +766,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\users\Delete.cshtml" />
     <Content Include="Views\users\Details.cshtml" />
-    <Content Include="Views\users\Edit.cshtml" />
-    <Content Include="Views\users\Index.cshtml" />
     <Content Include="Views\Campus_Branches\Create.cshtml" />
     <Content Include="Views\Campus_Branches\Delete.cshtml" />
     <Content Include="Views\Campus_Branches\Details.cshtml" />
@@ -784,11 +782,6 @@
     <Content Include="Views\Guests\Details.cshtml" />
     <Content Include="Views\Guests\Edit.cshtml" />
     <Content Include="Views\Guests\Index.cshtml" />
-    <Content Include="Views\Logs\Create.cshtml" />
-    <Content Include="Views\Logs\Delete.cshtml" />
-    <Content Include="Views\Logs\Details.cshtml" />
-    <Content Include="Views\Logs\Edit.cshtml" />
-    <Content Include="Views\Logs\Index.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Delete.cshtml" />
     <Content Include="Views\Roles\Details.cshtml" />
@@ -800,7 +793,6 @@
     <Content Include="Views\semesters\Edit.cshtml" />
     <Content Include="Views\semesters\Index.cshtml" />
     <Content Include="Views\UserLocations\Create.cshtml" />
-    <Content Include="Views\UserLocations\Delete.cshtml" />
     <Content Include="Views\UserLocations\Details.cshtml" />
     <Content Include="Views\UserLocations\Edit.cshtml" />
     <Content Include="Views\UserLocations\Index.cshtml" />
@@ -924,12 +916,18 @@
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Inquiries\Create.cshtml" />
-    <Content Include="Views\Inquiries\Delete.cshtml" />
     <Content Include="Views\Inquiries\Details.cshtml" />
     <Content Include="Views\Inquiries\Edit.cshtml" />
     <Content Include="Views\Inquiries\Index.cshtml" />
     <Content Include="Views\Inquiries\userResponse.cshtml" />
     <Content Include="Views\Inquiries\userInquiries.cshtml" />
+    <Content Include="Views\Calendar\userCalender.cshtml" />
+    <Content Include="Views\Shared\adminlayout.cshtml" />
+    <Content Include="Views\Logs\Create.cshtml" />
+    <Content Include="Views\Logs\Delete.cshtml" />
+    <Content Include="Views\Logs\Details.cshtml" />
+    <Content Include="Views\Logs\Edit.cshtml" />
+    <Content Include="Views\Logs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

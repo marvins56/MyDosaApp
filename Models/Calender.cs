@@ -22,5 +22,6 @@ namespace StudentAffiairs.Models
         public string rec_type { get; set; }
         public Nullable<int> event_pid { get; set; }
         public string userid { get; set; }
+        public string color { get; set; }
     }
 }

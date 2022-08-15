@@ -1,4 +1,8 @@
-﻿@if (TempData["success"] != null)
+﻿@{
+    Layout = "~/Views/Shared/adminlayout.cshtml";
+}
+
+@if (TempData["success"] != null)
 {
     <script>
      swal({
@@ -27,11 +31,20 @@
     <link href="~/Content/dhtmlxScheduler/dhtmlxscheduler-responsive.css" rel="stylesheet" />
     <script src="~/Scripts/dhtmlxScheduler/dhtmlxscheduler-responsive.js"></script>
 
-    <div style="height:500px;width:100%;margin:0 auto">
-        <!--<input type="button" value="Print to ical" onclick="@Model.ToICal(" /ExportToICal/Export", "data" )" />--> 
-        <input type="button" value="Print to pdf" onclick=" @Model.ToPDF(" https://dhtmlxscheduler.appspot.com/export/pdf")" />
-        @*<input type="button" value="Print for a month" onclick=" @Model.ToPDFRange(" https://dhtmlxscheduler.appspot.com/export/pdf", 200)"/>*@
-        @Html.Raw(Model.Render())
+    
+       
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="height:700px;width:100%;margin:0 auto">
+                <h5 class="card-header">VIEW USER TRAVEL SCHEDULES</h5>
+                @*<button type="button" value="Print to ical" onclick="@Model.ToICal(" /ExportToICal/Export", "data" )" />
+                <button type="button" value="Print to pdf" onclick=" @Model.ToPDF(" https://dhtmlxscheduler.appspot.com/export/pdf")" />
+                <button type="button" value="Print for a month" onclick=" @Model.ToPDFRange(" https://dhtmlxscheduler.appspot.com/export/pdf", 200)"/>*@
+
+                @Html.Raw(Model.Render())
+            </div>
+        </div>
     </div>
+   
 </div>
 

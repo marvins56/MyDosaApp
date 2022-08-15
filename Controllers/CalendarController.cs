@@ -14,6 +14,8 @@ using StudentAffiairs.Models;
 using DHTMLX.Scheduler.Settings;
 using NUnit.Framework.Internal.Execution;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Web.Security;
 
 namespace StudentAffiairs.Controllers
 {
@@ -43,16 +45,15 @@ namespace StudentAffiairs.Controllers
             scheduler.Config.map_resolve_event_location = true;
             scheduler.Extensions.Add(SchedulerExtensions.Extension.Serialize);
             scheduler.Extensions.Add(SchedulerExtensions.Extension.PDF);
-
+            scheduler.InitialValues.Add("text", "HELLO STUDENT PLEASE ADD EVENT HERE!");
             scheduler.Config.map_resolve_user_location = true;
 // HYBRID - displays a transparent layer of major streets on satellite images.
 //ROADMAP - displays a normal street map.
 //SATELLITE - displays satellite images.
 //TERRAIN - displays maps with physical features such as terrain and vegetation.
 
-            //scheduler.Config.cascade_event_count = 5;
-            scheduler.Config.displayed_event_color = "#554994";
-           scheduler.InitialDate = new DateTime(2012, 09, 03);
+        
+    
             scheduler.Config.touch_drag = 700;
             //To enable the extension you just need to add the related extension file on the page: 
             
@@ -112,7 +113,13 @@ namespace StudentAffiairs.Controllers
                 { 
                     case DataActionTypes.Insert:
                         //do insert
-                        changedEvent.userid = "A90648";
+                        changedEvent.userid = "A72849";
+                        Random randomGen = new Random();
+                        KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+                        KnownColor randomColorName = names[randomGen.Next(names.Length)];
+                        Color randomColor = Color.FromKnownColor(randomColorName);
+                        changedEvent.color = randomColor.ToString().Substring(6,8);
+
                         db.Calenders.Add(changedEvent);
                         break;
                     case DataActionTypes.Delete:
@@ -125,11 +132,12 @@ namespace StudentAffiairs.Controllers
                             //do update
                         var eventToUdate = db.Calenders.SingleOrDefault(
                           ev => ev.Id == action.SourceId);
-                        DHXEventsHelper.Update(eventToUdate, changedEvent, new List<string>() { "Id"});
+                        DHXEventsHelper.Update(eventToUdate, changedEvent, new List<string>() { "id"});
                         break;
                 }
-                db.SaveChanges();
                 action.TargetId = changedEvent.Id;
+                db.SaveChanges();
+                
                 TempData["update"] = "Operation Successfull";
             }
             catch(Exception e)
@@ -146,12 +154,16 @@ namespace StudentAffiairs.Controllers
             var resp = new SchedulerAjaxData(myCalendar);
             return View(resp);
         }
-        public ActionResult Export()
-        {
-            Response.ContentType = "text/plain";
-            Response.AppendHeader("content-disposition", "attachment; filename=dhtmlxScheduler.ics");
-            return Content(Request.Form["data"].ToString());
-        }
+        //public ActionResult Export()
+        //{
+        //    Response.ContentType = "text/plain";
+        //    Response.AppendHeader("content-disposition", "attachment; filename=dhtmlxScheduler.ics");
+        //    return Content(Request.Form["data"].ToString());
+        //}
+
+      
+
+
     }
 }
 

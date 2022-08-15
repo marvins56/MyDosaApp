@@ -17,6 +17,7 @@
           <Property Name="rec_type" Type="nvarchar" MaxLength="50" />
           <Property Name="event_pid" Type="int" />
           <Property Name="userid" Type="nvarchar" MaxLength="50" />
+          <Property Name="color" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Campus_Branches">
           <Key>
@@ -286,6 +287,7 @@
           <Property Name="rec_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="event_pid" Type="Int32" />
           <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Campus_Branches">
           <Key>
@@ -564,6 +566,7 @@
           <EntitySetMapping Name="Calenders">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Calender">
               <MappingFragment StoreEntitySet="Calender">
+                <ScalarProperty Name="color" ColumnName="color" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />

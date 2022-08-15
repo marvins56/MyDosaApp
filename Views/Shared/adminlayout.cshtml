@@ -57,39 +57,38 @@
             z-index: 5;
         }
 
-    .mobile-nav li {
-     
-        display:inline-flex;
-        
-    }
-
-        .mobile-nav li a {
-       /*     display: block;*/
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
+        .mobile-nav li {
+            display: inline-flex;
         }
 
-            .mobile-nav li a:hover:not(.active) {
-                background-color: #5800FF;
-              border-radius:15px;
+            .mobile-nav li a {
+                /*     display: block;*/
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
             }
 
-    .mobile-nav .active {
-        background-color: #04AA6D;
-    }
+                .mobile-nav li a:hover:not(.active) {
+                    background-color: #5800FF;
+                    border-radius: 15px;
+                }
+
+        .mobile-nav .active {
+            background-color: #04AA6D;
+        }
 
         @@media screen and (min-width: 1200px) {
             .mobile-nav {
                 display: none;
             }
         }
-            @@media screen and (max-width: 1200px) {
-                .footer {
-                    display: none;
-                }
+
+        @@media screen and (max-width: 1200px) {
+            .footer {
+                display: none;
             }
+        }
     </style>
 </head>
 
@@ -99,60 +98,57 @@
 
             <li>
                 <a href="@Url.Action("Index","Home")" class="bloc-icon"
-                       data-bs-toggle="tooltip"
-                        data-bs-offset="0,4"
-                      
-                        data-bs-html="true" title=" <span>Home</span>">
-                   
+                   data-bs-toggle="tooltip"
+                   data-bs-offset="0,4"
+                   data-bs-html="true" title=" <span>Home</span>">
+
                     <i class="fa-solid fa-house-chimney fa-2x"></i>
 
-            </a>
+                </a>
             </li>
             <li>
-                <a href="@Url.Action("userCalender","Calendar")" class="bloc-icon"
-                       data-bs-toggle="tooltip"
-                        data-bs-offset="0,4"
-                      
-                        data-bs-html="true" title=" <span>Shedule travel</span>">
-                   
-                   
+                <a href="@Url.Action("index","Calendar")" class="bloc-icon"
+                   data-bs-toggle="tooltip"
+                   data-bs-offset="0,4"
+                   data-bs-html="true" title=" <span>Shedule travel</span>">
+
+
                     <i class="fa-solid fa-calendar-check fa-2x "></i>
 
                 </a>
             </li>
             <li>
-            <a href="@Url.Action("Create","Inquiries")" class="bloc-icon"
-                    data-bs-toggle="tooltip"
-                        data-bs-offset="0,4"
-                        
-                        data-bs-html="true" title=" <span>Inquire</span>">
-               
-               
-        <i class="fa-solid fa-headset  fa-2x"></i>
-
-            </a>
-            </li>
-            <li>
-                <a href="javascript:void(0);" class="bloc-icon"    
+                <a href="@Url.Action("Index","Inquiries")" class="bloc-icon"
                    data-bs-toggle="tooltip"
-                        data-bs-offset="0,4"
-                     
-                        data-bs-html="true" title=" <span>My reports</span>">
-    <i class="fa-solid fa-file-zipper fa-2x "></i>
+                   data-bs-offset="0,4"
+                   data-bs-html="true" title=" <span>Inquire</span>">
 
-            </a>
+
+                    <i class="fa-solid fa-headset  fa-2x"></i>
+
+                </a>
             </li>
             <li>
-            <a href="javascript:void(0);" class="bloc-icon layout-menu-toggle" 
-               data-bs-toggle="tooltip"
-                        data-bs-offset="0,4"
-                       
-                        data-bs-html="true" title=" <span>More Items</span>">
-                
+                <a href="javascript:void(0);" class="bloc-icon"
+                   data-bs-toggle="tooltip"
+                   data-bs-offset="0,4"
+                   data-bs-html="true" title=" <span>reports</span>">
+                    <i class="fa-solid fa-file-zipper fa-2x "></i>
+
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="bloc-icon layout-menu-toggle"
+                   data-bs-toggle="tooltip"
+                   data-bs-offset="0,4"
+                   data-bs-html="true" title=" <span>More Items</span>">
+
                     <i class="fa-solid fa-ellipsis-vertical fa-2x"></i>
-</a></li>
+                </a>
+            </li>
         </ul>
     </nav>
+
 
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -183,25 +179,95 @@
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
                     </li>
+
+
+
+
                     <li class="menu-item">
-                        <a href="@Url.Action("userCalender","Calendar")" class="menu-link  ">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="fa-solid fa-users menu-icon"></i>
+
+                            <div data-i18n="Authentications">Users </div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="@Url.Action("UserInfo","Users")" class="menu-link">
+                                    <div data-i18n="Basic">Manage Users</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="@Url.Action("Users","Users")" class="menu-link">
+                                    <div data-i18n="Basic">User Details</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="@Url.Action("Index","Calendar")" class="menu-link">
                             <i class="fa-solid fa-calendar-check menu-icon "></i>
-                            <div data-i18n="Authentications">Schedule travel plan</div>
+                            <div data-i18n="Basic">General Calender</div>
                         </a>
                     </li>
-
-
                     <li class="menu-item">
-                        <a href="@Url.Action("Create","Inquiries")" class="menu-link  ">
+                        <a href="@Url.Action("index","Inquiries")" class="menu-link  ">
                             <i class="fa-solid fa-headset menu-icon"></i>
-                            <div data-i18n="Account Settings">Make Inquiry</div>
+                            <div data-i18n="Authentications">General inquries</div>
                         </a>
 
+                    </li>
+                    <li class="menu-item">
+                        <a href="@Url.Action("index","Responses")" class="menu-link  ">
+                            <i class="fa-solid fa-phone-volume menu-icon"></i>
+                            <div data-i18n="Authentications">General responses</div>
+                        </a>
+
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+
+                            <i class="fa-solid fa-gears menu-icon "></i>
+                            <div data-i18n="Authentications">System  Settings</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="@Url.Action("Index","Campus_Branches")" class="menu-link">
+                                    <div data-i18n="Basic">Manage Campuses</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="@Url.Action("Index","Roles")" class="menu-link">
+                                    <div data-i18n="Basic">Manage Roles</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="@Url.Action("Index","Userroles")" class="menu-link">
+                                    <div data-i18n="Basic">Assign UserRoles</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="@Url.Action("Index","Cours")" class="menu-link">
+                                    <div data-i18n="Basic">Manage courses</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="@Url.Action("Index","Semesters")" class="menu-link">
+                                    <div data-i18n="Basic">Manage Semesters</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="@Url.Action("Index","years")" class="menu-link">
+                                    <div data-i18n="Basic">Manage Years</div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link  ">
                             <i class="fa-solid fa-file-zipper menu-icon"></i>
-                            <div data-i18n="Authentications">My Travel Report</div>
+                            <div data-i18n="Authentications">Generate Report</div>
                         </a>
 
                     </li>
@@ -211,19 +277,12 @@
                             <div data-i18n="Authentications">Chat Forum</div>
                         </a>
                     </li>
-
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link  ">
-                            <i class="fa-solid fa-blender-phone menu-icon"></i>
-                            <div data-i18n="Authentications">Contact us</div>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="fa-solid fa-sliders menu-icon"></i>
+                            <div data-i18n="Authentications">System Logs</div>
                         </a>
-
                     </li>
-
-
-
-
-
                 </ul>
             </aside>
             <!-- / Menu -->
