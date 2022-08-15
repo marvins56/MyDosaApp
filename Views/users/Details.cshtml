@@ -3,88 +3,85 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="container-xxl flex-grow-1 container-p-y">
 
-<h2>Details</h2>
+    <div class="modal fade in" id="modalScrollable" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalScrollableTitle"> @Html.DisplayFor(model => model.UserName)  DETILS</h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </dt>
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.UserName)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Country)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Country)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
+                    
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Passcode)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Campus_Branches.Campus_branch)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Passcode)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cours.courseName)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Cours.courseName)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Campus_Branches.Campus_branch)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.semester.Semester_taken)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cours.courseName)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.semester.Semester_taken)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cours.courseName)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Year.yearName)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.semester.Semester_taken)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.semester.Semester_taken)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserLocation.From_Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserLocation.From_Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Year.yearName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Year.yearName)
-        </dd>
-
-    </dl>
+                        <dd>
+                            @Html.DisplayFor(model => model.Year.yearName)
+                        </dd>
+                    </dl>
+                </div>
+              
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AccessNumber }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<script type="text/javascript">
+        $(window).on('load', function () {
+            $('#modalScrollable').modal('show');
+        });
+</script>
