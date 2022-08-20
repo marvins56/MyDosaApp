@@ -21,6 +21,30 @@
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .sign-in {
+            background-image: url('/Template/assets/UCU-Libray.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-top: -100px;
+            overflow: hidden;
+        }
+
+        .container {
+            opacity: 0.8;
+            height: 800px;
+            background: #fff;
+        }
+
+        .signin-content {
+            padding: 200px 7px 2px 4px;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -42,50 +66,61 @@
          icon: "error"
         });</script>
     }
+    @if (Session["userid"] != null)
+    {
+
+        <div class="main" style="height:400px; margin-top:-50px">
 
 
-    <div class="main" style="height:400px; margin-top:-50px">
+            @using (Html.BeginForm("verify", "Users", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
 
-
-        @using (Html.BeginForm("verify", "Users", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            <!-- Sing in  Form -->
-            <section class="sign-in">
-                <div class="container">
-                    <div class="signin-content">
-                        <div class="signin-image">
-                            <figure><img src="~/Auth/images/signin-image.jpg" alt="sing up image"></figure>
-                            <a href="#" class="signup-image-link">Kindly check your email for the security code</a>
-                        </div>
-
-                        <div class="signin-form">
-                            <h2 class="form-title">SECURITY CODE</h2>
-                            <div class="register-form" id="register-form">
-                                <div class="form-group">
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                                    <label>  <i class="fa-solid fa-key pl-2"></i></label>
-                                    @Html.EditorFor(model => model.Passcode, new { htmlAttributes = new { @class = "", Placehoder = "security code" } })
-                                    @Html.ValidationMessageFor(model => model.Passcode, "", new { @class = "text-danger" })
-                                </div>
-
-
-                                <div class="form-group form-button">
-                                    <input type="submit" name="signup" id="signup" class="btn btn-primary w-100" value="Validate" />
-                                </div>
+                <!-- Sing in  Form -->
+                <section class="sign-in">
+                    <div class="container">
+                        <div class="signin-content">
+                            <div class="signin-image">
+                                <figure><img src="~/Auth/images/signin-image.jpg" alt="sing up image"></figure>
+                                <a href="#" class="signup-image-link">Kindly check your email for the security code</a>
                             </div>
 
+                            <div class="signin-form">
+                                <h2 class="form-title">SECURITY CODE</h2>
+                                <div class="register-form" id="register-form">
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <label>  <i class="fa-solid fa-key pl-2"></i></label>
+                                        @Html.EditorFor(model => model.Passcode, new { htmlAttributes = new { @class = "", Placehoder = "security code" } })
+                                        @Html.ValidationMessageFor(model => model.Passcode, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-group form-button">
+                                        <input type="submit" name="signup" id="signup" class="btn btn-primary w-100" value="Validate" />
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
 
-        }
+            }
 
-    </div>
+        </div>
+    }
+    else
+    {
+        <script>
+     swal({
+        title: "SESSION ERROR",
+  text: "INVALID SESSIONS.",
+         icon: "warning"
+        });</script>
+    }
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4c68cc89c5744e2c9db0acff382c1ff1" Name="Diagram1">
+      <Diagram DiagramId="b8713a8a5457462296981db655616a20" Name="Diagram1">
         <EntityTypeShape EntityType="MyDosa_dbModel.Calender" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MyDosa_dbModel.Campus_Branches" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="MyDosa_dbModel.Cours" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyDosa_dbModel.Guest" Width="1.5" PointX="5.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyDosa_dbModel.Inquiry" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyDosa_dbModel.Log" Width="1.5" PointX="7.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyDosa_dbModel.Event" Width="1.5" PointX="9.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyDosa_dbModel.Guest" Width="1.5" PointX="5.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyDosa_dbModel.Inquiry" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyDosa_dbModel.Log" Width="1.5" PointX="7.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MyDosa_dbModel.Response" Width="1.5" PointX="8" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="MyDosa_dbModel.Role" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyDosa_dbModel.semester" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />

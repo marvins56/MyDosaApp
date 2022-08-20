@@ -18,28 +18,29 @@
     <!-- Main css -->
     <link rel="stylesheet" href="~/Auth/css/style.css">
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="~/Content/loader.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-<style>
-  .signup{
-        background-image: url('/Template/assets/UCU-Libray.jpg');
-             background-position:center;
-        background-size:cover;
-        background-repeat:no-repeat;
-    }
-    .container{
-        opacity:0.8;
-          
-    }
-    .signup-content,.signup-form{
-        padding-bottom:50px;
-        opacity:1;
-    }
+    <style>
+        .signup {
+            background-image: url('/Template/assets/UCU-Libray.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
 
-</style>
+        .container {
+            opacity: 0.8;
+            background: #fff;
+        }
+
+        .signup-content, .signup-form {
+            padding-bottom: 50px;
+            opacity: 1;
+        }
+    </style>
 </head>
 
-<body >
+<body>
 
     @if (TempData["regerror"] != null)
     {
@@ -58,7 +59,16 @@
         {
             @Html.AntiForgeryToken()
 
-
+            <div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+                <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+                    <div class="uil-default-css">
+                        <div class="loader">Loading...</div>
+                        <div id="loader"></div>
+                    </div>
+                    <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+                </div>
+                <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+            </div>
             <!-- Sign up form -->
             <section class="signup">
                 <div class="container">
@@ -124,9 +134,7 @@
                     </div>
                 </div>
             </section>
-
         }
-
     </div>
 
     <!-- JS -->
@@ -135,6 +143,20 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        var showLoader = function (text) {
+            $('#resultLoading').show();
+            $('#resultLoading').find('.loader-text').html(text);
+        };
+
+        jQuery(document).ready(function () {
+            jQuery(window).on("beforeunload ", function () {
+                showLoader('Loading, please wait...');
+            });
+        });
+
+        $("#loader").fadeOut(1000);
+    </script>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }

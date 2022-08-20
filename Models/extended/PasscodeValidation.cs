@@ -15,9 +15,7 @@ namespace StudentAffiairs.Models
     {
         [Display(Name = "Access Number")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Access Number field required")]
-        public string AccessNumber { get; set; }
-  
-
+        public string AccessNumber { get; set; } 
         [Display(Name = "Security Passcode")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Passcode field required")]
         [MinLength(5, ErrorMessage = "invalid  Security Passcode length")]

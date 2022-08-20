@@ -65,6 +65,18 @@ namespace StudentAffiairs.Controllers
           
             return View(myInquiries);
         }
+        public ActionResult myInquiries()
+        {
+           string id = Session["userid"].ToString();
+            var myInquiries = db.Inquiries.Where(a => a.UserId == id).ToList();
+            if (myInquiries == null)
+            {
+                TempData["nullvalue"] = id + " Has NO INQUIRIES";
+                return RedirectToAction("index");
+            }
+
+            return View(myInquiries);
+        }
         // GET: Inquiries/Details/5
         public ActionResult Details(int? id)
         {

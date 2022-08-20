@@ -10,6 +10,10 @@ namespace StudentAffiairs.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["userid"] == null)
+            {
+                TempData["errorid"] = "invalid sessions";
+            }
             return View();
         }
 

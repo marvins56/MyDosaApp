@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "make inqury";
 }
-
 <div class="container-xxl flex-grow-1 container-p-y">
 
     <div class="row">
@@ -25,7 +24,9 @@
                             @*@Html.LabelFor(model => model.inquirry, htmlAttributes: new { @lass = "form-label" })*@
                         
                                 <input type="submit" value="SUBMIT" class="btn btn-primary w-50" />
-                                            
+                                <a href="@Url.Action("myInquiries","Inquiries" )" class="btn btn-primary">
+                                   My Inquiries
+                                </a>           
                         </div>
                     </div>
                 }

@@ -60,9 +60,7 @@ namespace StudentAffiairs.Controllers
             return View();
         }
 
-        // POST: users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+   
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "AccessNumber,UserName,Email,Course_code,sem_id,Year_Id,campus_id,Country,Passcode")] Student student)
@@ -131,6 +129,7 @@ namespace StudentAffiairs.Controllers
         {
             try
             { //check if email and access number exist
+
                 var accessno = db.Students.Where(a => a.AccessNumber == users.AccessNumber).Select(a => a.AccessNumber).FirstOrDefault();
                 var Email = db.Students.Where(a => a.AccessNumber == users.AccessNumber).Select(a => a.Email).FirstOrDefault();
                 var passcode = db.Students.Where(a => a.AccessNumber == users.AccessNumber).Select(a => a.Passcode).FirstOrDefault();
@@ -144,10 +143,16 @@ namespace StudentAffiairs.Controllers
                     db.SaveChanges();
                     if (res > 0)
                     {
-                        //SendEmailPasscode(Email, passcode);
+                        SendEmailPasscode(Email, passcode);
                         TempData["success"] = "check Student Email for Security code.";
                         return RedirectToAction("verify");
                     }
+                }
+                else
+                {
+                    TempData["error"] = "USER NOT FOUND";
+                    
+
                 }
             }
             catch(Exception e)
@@ -229,7 +234,8 @@ namespace StudentAffiairs.Controllers
         {
 
             var userid = Session["userid"].ToString();
-
+            var userrolesz = db.Userroles.Where(a => a.AccessNo == userid).Select(a =>a.Roleid).FirstOrDefault();
+            var actualrole = db.Roles.Where(a => a.Role_id == userrolesz).Select(a => a.Role1).FirstOrDefault();
             try
             {
                 var Passcode = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.Passcode).FirstOrDefault();
@@ -237,7 +243,16 @@ namespace StudentAffiairs.Controllers
                 {
                     TempData["success"] = "verified";
 
-                    return RedirectToAction("index","Home");
+
+                    if(actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
+                    {
+                        return RedirectToAction("index", "Events");
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "Home");
+                    }
+                    
                 }
                 else
                 {
@@ -251,6 +266,11 @@ namespace StudentAffiairs.Controllers
 
 
             return View(passcodes);
+        }
+        public ActionResult logout()
+        {
+            Session.Clear();
+            return RedirectToAction("login");
         }
         protected override void Dispose(bool disposing)
         {

@@ -4,20 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MyDosa_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MyDosa_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Calender">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Text" Type="varchar(max)" Nullable="false" />
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" Nullable="false" />
-          <Property Name="event_length" Type="bigint" />
-          <Property Name="rec_type" Type="nvarchar" MaxLength="50" />
-          <Property Name="event_pid" Type="int" />
-          <Property Name="userid" Type="nvarchar" MaxLength="50" />
-          <Property Name="color" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Campus_Branches">
           <Key>
@@ -32,6 +27,19 @@
           </Key>
           <Property Name="Course_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="courseName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="ThemeColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsFullDay" Type="bit" Nullable="false" />
+          <Property Name="userid" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Guests">
           <Key>
@@ -70,7 +78,7 @@
           </Key>
           <Property Name="ResponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Inquirery_id" Type="int" Nullable="false" />
-          <Property Name="Response" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Response" Type="varchar(max)" Nullable="false" />
           <Property Name="DatetimeOfReply" Type="datetime" Nullable="false" />
           <Property Name="status" Type="bit" />
         </EntityType>
@@ -228,6 +236,7 @@
           <EntitySet Name="Calender" EntityType="Self.Calender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Campus_Branches" EntityType="Self.Campus_Branches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inquiries" EntityType="Self.Inquiries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
@@ -271,7 +280,8 @@
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyDosa_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -280,14 +290,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="event_length" Type="Int64" />
-          <Property Name="rec_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="event_pid" Type="Int32" />
-          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Campus_Branches">
           <Key>
@@ -304,6 +309,19 @@
           <Property Name="Course_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="courseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Students" Relationship="Self.FK_CourseCode" FromRole="Courses" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="ThemeColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Guest">
           <Key>
@@ -343,10 +361,10 @@
           </Key>
           <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Inquirery_id" Type="Int32" Nullable="false" />
-          <Property Name="Response1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Response1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DatetimeOfReply" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inquiry" Relationship="Self.FK_response" FromRole="Response" ToRole="Inquiries" />
           <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="Inquiry" Relationship="Self.FK_response" FromRole="Response" ToRole="Inquiries" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -514,6 +532,7 @@
           <EntitySet Name="Calenders" EntityType="Self.Calender" />
           <EntitySet Name="Campus_Branches" EntityType="Self.Campus_Branches" />
           <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
           <EntitySet Name="Guests" EntityType="Self.Guest" />
           <EntitySet Name="Inquiries" EntityType="Self.Inquiry" />
           <EntitySet Name="Logs" EntityType="Self.Log" />
@@ -566,15 +585,10 @@
           <EntitySetMapping Name="Calenders">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Calender">
               <MappingFragment StoreEntitySet="Calender">
-                <ScalarProperty Name="color" ColumnName="color" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="event_length" ColumnName="event_length" />
-                <ScalarProperty Name="rec_type" ColumnName="rec_type" />
-                <ScalarProperty Name="event_pid" ColumnName="event_pid" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -591,6 +605,20 @@
               <MappingFragment StoreEntitySet="Courses">
                 <ScalarProperty Name="Course_code" ColumnName="Course_code" />
                 <ScalarProperty Name="courseName" ColumnName="courseName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -630,11 +658,11 @@
           <EntitySetMapping Name="Responses">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Response">
               <MappingFragment StoreEntitySet="Response">
-                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
                 <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
                 <ScalarProperty Name="Response1" ColumnName="Response" />
                 <ScalarProperty Name="DatetimeOfReply" ColumnName="DatetimeOfReply" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

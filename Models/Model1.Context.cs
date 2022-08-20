@@ -28,6 +28,7 @@ namespace StudentAffiairs.Models
         public virtual DbSet<Calender> Calenders { get; set; }
         public virtual DbSet<Campus_Branches> Campus_Branches { get; set; }
         public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<Inquiry> Inquiries { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
@@ -38,7 +39,5 @@ namespace StudentAffiairs.Models
         public virtual DbSet<UserLocation> UserLocations { get; set; }
         public virtual DbSet<Userrole> Userroles { get; set; }
         public virtual DbSet<Year> Years { get; set; }
-
-        public System.Data.Entity.DbSet<StudentAffiairs.CalendarEvent> CalendarEvents { get; set; }
     }
 }
