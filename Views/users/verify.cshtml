@@ -30,7 +30,7 @@
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
-            margin-top: -100px;
+            margin-top: -150px;
             overflow: hidden;
         }
 
@@ -68,9 +68,7 @@
     }
     @if (Session["userid"] != null)
     {
-
         <div class="main" style="height:400px; margin-top:-50px">
-
 
             @using (Html.BeginForm("verify", "Users", FormMethod.Post))
             {
@@ -81,7 +79,7 @@
                     <div class="container">
                         <div class="signin-content">
                             <div class="signin-image">
-                                <figure><img src="~/Auth/images/signin-image.jpg" alt="sing up image"></figure>
+                                <figure><img src="~/Auth/images/signin-image.png" alt="sing up image"></figure>
                                 <a href="#" class="signup-image-link">Kindly check your email for the security code</a>
                             </div>
 

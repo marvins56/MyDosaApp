@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FullCalendar;
+using NUnit.Framework.Internal.Execution;
 using StudentAffiairs.Models;
 using Event = StudentAffiairs.Models.Event;
 
@@ -27,9 +28,21 @@ namespace StudentAffiairs.Controllers
         }
         public ActionResult Myshedules()
         {
-            string id = Session["userid"].ToString();
-            var shedule = db.Events.Where(a => a.userid == id).ToList();
-            return View(shedule);
+            try
+            {
+                string id = Session["userid"].ToString();
+                if(id!= null)
+                {
+                    var shedule = db.Events.Where(a => a.userid == id).ToList();
+                    return View(shedule);
+                }
+              
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = e.Message;
+            }
+            return View();
         }
         public ActionResult Mycalendar()
         {
@@ -40,17 +53,40 @@ namespace StudentAffiairs.Controllers
         {
             using (MyDosa_dbEntities dc = new MyDosa_dbEntities())
             {
-                var events = dc.Events.ToList();
-                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                try
+                {
+                    var events = dc.Events.ToList();
+                    return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }catch(Exception e)
+                {
+                    TempData["error"] = e.Message;
+}
+                return new JsonResult { Data = null, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
             }
         }
         public JsonResult GetmyEvents()
         {
             using (MyDosa_dbEntities dc = new MyDosa_dbEntities())
             {
-                string id = Session["userid"].ToString();
-                var shedule = db.Events.Where(a => a.userid == id).ToList();
-                return new JsonResult { Data = shedule, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                try
+                {
+                    string id = Session["userid"].ToString();
+                    if(id == null) {
+
+                        TempData["error"] = "ERROR WHILE VALIDATING USER";
+                    } else
+                    {
+                        var shedule = db.Events.Where(a => a.userid == id).ToList();
+                        return new JsonResult { Data = shedule, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    }
+                   
+                }catch(Exception E)
+                {
+                    TempData["error"] = E.Message;
+                   
+                }
+                return new JsonResult { Data = null, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
         }
         [HttpPost]
@@ -118,7 +154,7 @@ namespace StudentAffiairs.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(@event);
+            return RedirectToAction("Index", @event);
         }
         public ActionResult AdminCreate()
         {

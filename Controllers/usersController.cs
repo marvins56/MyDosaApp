@@ -144,15 +144,14 @@ namespace StudentAffiairs.Controllers
                     if (res > 0)
                     {
                         SendEmailPasscode(Email, passcode);
-                        TempData["success"] = "check Student Email for Security code.";
+                        TempData["success"] = "HELLO " + Session["userid"]+ ". Security Code has been sent to " + Email;
                         return RedirectToAction("verify");
                     }
                 }
                 else
                 {
                     TempData["error"] = "USER NOT FOUND";
-                    
-
+                  
                 }
             }
             catch(Exception e)
