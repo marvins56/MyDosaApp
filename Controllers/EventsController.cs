@@ -175,8 +175,6 @@ namespace StudentAffiairs.Controllers
             return View(@event);
         }
 
-
-
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)
         {

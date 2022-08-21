@@ -544,6 +544,7 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <None Include="Properties\PublishProfiles\mydosawebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -966,6 +967,7 @@
     <Content Include="Views\Events\Myshedules.cshtml" />
     <Content Include="Views\Events\AdminDetails.cshtml" />
     <Content Include="Views\Home\Underdeveloment.cshtml" />
+    <Content Include="Views\Shared\Eventslayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

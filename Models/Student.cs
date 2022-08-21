@@ -40,7 +40,7 @@ namespace StudentAffiairs.Models
         public int campus_id { get; set; }
         [Display(Name = "YEAR")]
         [Required(AllowEmptyStrings = false, ErrorMessage = " COUNTRY field required")]
-        [MinLength(10, ErrorMessage = "invalid COUNTRY length")]
+        [MinLength(4, ErrorMessage = "invalid COUNTRY length")]
      
         public string Country { get; set; }
         public string Passcode { get; set; }

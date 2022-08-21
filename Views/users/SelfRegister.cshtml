@@ -54,7 +54,6 @@
 
     <div class="main" style="height:500px; margin-top:-150px;">
 
-
         @using (Html.BeginForm("SelfRegister", "Users", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
@@ -87,7 +86,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
-                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "", Placeholder = "User Name" } })
+                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "", Placeholder = "eg user@students.ucu.ac.ug" } })
                                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">

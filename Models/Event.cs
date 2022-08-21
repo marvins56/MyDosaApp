@@ -13,6 +13,7 @@ using System.Xml.Linq;
         public int EventID { get; set; }
         [Display(Name="TRAVEL SUBJECT")]
         public string Subject { get; set; }
+
         [Display(Name = " TRAVEL DESCRIPTION")]
         [DataType(DataType.MultilineText)]
         [MaxLength(500, ErrorMessage = "please give a shorter sentence")]
@@ -22,12 +23,12 @@ using System.Xml.Linq;
         [Display(Name = "SET OFF TIME")]
         [DataType(DataType.Date)]
         [Required(AllowEmptyStrings = false, ErrorMessage = " setofftime field required")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{DD/MM/YYYY HH:mm A}", ApplyFormatInEditMode = true)]
         public System.DateTime Start { get; set; }
         [Display(Name = "ESTIMATED ARRIVAL TIME")]
         [DataType(DataType.Date)]
         [Required(AllowEmptyStrings = false, ErrorMessage = " arrival time field required")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{DD/MM/YYYY HH:mm A}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> End { get; set; }
         public string ThemeColor { get; set; }
         public bool IsFullDay { get; set; }
