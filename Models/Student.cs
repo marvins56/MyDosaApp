@@ -43,6 +43,8 @@ namespace StudentAffiairs.Models
         [MinLength(4, ErrorMessage = "invalid COUNTRY length")]
      
         public string Country { get; set; }
+        [MinLength(6, ErrorMessage = "invalid COUNTRY length")]
+        [MaxLength(6, ErrorMessage = "invalid COUNTRY length")]
         public string Passcode { get; set; }
         public virtual Campus_Branches Campus_Branches { get; set; }
         public virtual Cours Cours { get; set; }

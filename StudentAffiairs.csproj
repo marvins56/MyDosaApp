@@ -53,6 +53,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FullCalendar.Helper, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FullCalendar.Helper.1.0.2\lib\net452\FullCalendar.Helper.dll</HintPath>
+    </Reference>
     <Reference Include="FullCalendar.MVC5, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\FullCalendar.MVC5.1.0.6\lib\net45\FullCalendar.MVC5.dll</HintPath>
     </Reference>
@@ -62,6 +65,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Mime, Version=3.4.0.0, Culture=neutral, PublicKeyToken=1b320cc08ad5aa89, processorArchitecture=MSIL">
+      <HintPath>packages\Mime.3.4.0\lib\net472\Mime.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeTypesMap, Version=1.0.8.0, Culture=neutral, PublicKeyToken=1b320cc08ad5aa89, processorArchitecture=MSIL">
+      <HintPath>packages\MimeTypesMap.1.0.8\lib\net452\MimeTypesMap.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -127,23 +136,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\Campus_BranchesController.cs" />
-    <Compile Include="Controllers\CoursController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\ExportToICalController.cs" />
     <Compile Include="Controllers\ExportToPDFController.cs" />
-    <Compile Include="Controllers\GuestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InquiriesController.cs" />
-    <Compile Include="Controllers\LogsController.cs" />
-    <Compile Include="Controllers\ResponsesController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\semestersController.cs" />
-    <Compile Include="Controllers\UserLocationsController.cs" />
-    <Compile Include="Controllers\UserrolesController.cs" />
-    <Compile Include="Controllers\usersController.cs" />
-    <Compile Include="Controllers\YearsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -208,157 +203,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Auth\css\style.css" />
-    <Content Include="Auth\fonts\material-icon\css\material-design-iconic-font.css" />
-    <Content Include="Auth\fonts\material-icon\css\material-design-iconic-font.min.css" />
-    <Content Include="Auth\fonts\material-icon\fonts\Material-Design-Iconic-Font.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300italic.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500italic.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-600.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700italic.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800italic.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-900.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-italic.svg" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-regular.svg" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700.svg" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700italic.svg" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-italic.svg" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-regular.svg" />
-    <Content Include="Auth\images\signin-image.jpg" />
-    <Content Include="Auth\images\signup-image.jpg" />
-    <Content Include="Auth\images\signin-image.png" />
-    <Content Include="Auth\images\signup-image.png" />
-    <Content Include="Auth\index.html" />
-    <Content Include="Auth\js\main.js" />
-    <Content Include="Auth\readme.txt" />
-    <Content Include="Auth\ucu logo.jpg" />
-    <Content Include="Auth\vendor\jquery\jquery-ui.min.js" />
-    <Content Include="Auth\vendor\jquery\jquery.min.js" />
-    <Content Include="Content\bootstrap-datetimepicker.css" />
-    <Content Include="Content\bootstrap-datetimepicker.min.css" />
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fullcalendar.css" />
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\fullcalendar.print.min.css" />
-    <Content Include="Content\navvar.html" />
     <Content Include="Content\loader.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Auth\.sass-cache\21880c0ffe15753a53f8402e9f64e1077e071510\style.scssc" />
-    <Content Include="Auth\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\extend.scssc" />
-    <Content Include="Auth\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\fonts.scssc" />
-    <Content Include="Auth\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\global.scssc" />
-    <Content Include="Auth\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\minxi.scssc" />
-    <Content Include="Auth\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\variables.scssc" />
-    <Content Include="Auth\.sass-cache\3948936f84e1a30385e73a9be140b58b48c82e15\style.scssc" />
-    <Content Include="Auth\.sass-cache\643489b018602f15119d8f44aeb7fc79468873a9\main.scssc" />
-    <Content Include="Auth\.sass-cache\643489b018602f15119d8f44aeb7fc79468873a9\responsive.scssc" />
-    <Content Include="Auth\.sass-cache\7643c8aa2e335ff5e104bc47d8dd7f1a0693bb39\extend.scssc" />
-    <Content Include="Auth\.sass-cache\7643c8aa2e335ff5e104bc47d8dd7f1a0693bb39\fonts.scssc" />
-    <Content Include="Auth\.sass-cache\7643c8aa2e335ff5e104bc47d8dd7f1a0693bb39\global.scssc" />
-    <Content Include="Auth\.sass-cache\7643c8aa2e335ff5e104bc47d8dd7f1a0693bb39\minxi.scssc" />
-    <Content Include="Auth\.sass-cache\7643c8aa2e335ff5e104bc47d8dd7f1a0693bb39\variables.scssc" />
-    <Content Include="Auth\.sass-cache\9dc767a56f3dc2f8a933300255cd2265f13191d4\main.scssc" />
-    <Content Include="Auth\.sass-cache\9dc767a56f3dc2f8a933300255cd2265f13191d4\responsive.scssc" />
-    <Content Include="Auth\css\style.css.map" />
-    <Content Include="Auth\fonts\material-icon\fonts\Material-Design-Iconic-Font.eot" />
-    <Content Include="Auth\fonts\material-icon\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="Auth\fonts\material-icon\fonts\Material-Design-Iconic-Font.woff" />
-    <Content Include="Auth\fonts\material-icon\fonts\Material-Design-Iconic-Font.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300italic.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300italic.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300italic.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-300italic.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500italic.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500italic.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500italic.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-500italic.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-600.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-600.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-600.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-600.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700italic.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700italic.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700italic.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-700italic.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800italic.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800italic.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800italic.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-800italic.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-900.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-900.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-900.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-900.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-italic.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-italic.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-italic.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-italic.woff2" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-regular.eot" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-regular.ttf" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-regular.woff" />
-    <Content Include="Auth\fonts\poppins\poppins-v5-latin-regular.woff2" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700.eot" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700.ttf" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700.woff" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700.woff2" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700italic.eot" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700italic.ttf" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700italic.woff" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-700italic.woff2" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-italic.eot" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-italic.ttf" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-italic.woff" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-italic.woff2" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-regular.eot" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-regular.ttf" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-regular.woff" />
-    <Content Include="Auth\fonts\poppins\roboto-condensed-v16-latin-regular.woff2" />
-    <Content Include="Auth\scss\common\extend.scss" />
-    <Content Include="Auth\scss\common\fonts.scss" />
-    <Content Include="Auth\scss\common\global.scss" />
-    <Content Include="Auth\scss\common\minxi.scss" />
-    <Content Include="Auth\scss\common\variables.scss" />
-    <Content Include="Auth\scss\layouts\main.scss" />
-    <Content Include="Auth\scss\layouts\responsive.scss" />
-    <Content Include="Auth\scss\style.scss" />
     <Content Include="database file\MyDosa_db.bak" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -370,16 +226,21 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap-datetimepicker.js" />
-    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\mydosawebapp - Web Deploy.pubxml" />
+    <Content Include="nuget.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\fullcalendar.helper.js" />
-    <Content Include="Scripts\fullcalendar.helper.min.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.js" />
@@ -460,96 +321,11 @@
     <Content Include="Scripts\fullcalendar\locale\zh-tw.js" />
     <Content Include="Scripts\gcal.js" />
     <Content Include="Scripts\gcal.min.js" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap\wells.less" />
-    <Content Include="Content\bootstrap\variables.less" />
-    <Content Include="Content\bootstrap\utilities.less" />
-    <Content Include="Content\bootstrap\type.less" />
-    <Content Include="Content\bootstrap\tooltip.less" />
-    <Content Include="Content\bootstrap\thumbnails.less" />
-    <Content Include="Content\bootstrap\theme.less" />
-    <Content Include="Content\bootstrap\tables.less" />
-    <Content Include="Content\bootstrap\scaffolding.less" />
-    <Content Include="Content\bootstrap\responsive-utilities.less" />
-    <Content Include="Content\bootstrap\responsive-embed.less" />
-    <Content Include="Content\bootstrap\progress-bars.less" />
-    <Content Include="Content\bootstrap\print.less" />
-    <Content Include="Content\bootstrap\popovers.less" />
-    <Content Include="Content\bootstrap\panels.less" />
-    <Content Include="Content\bootstrap\pagination.less" />
-    <Content Include="Content\bootstrap\pager.less" />
-    <Content Include="Content\bootstrap\normalize.less" />
-    <Content Include="Content\bootstrap\navs.less" />
-    <Content Include="Content\bootstrap\navbar.less" />
-    <Content Include="Content\bootstrap\modals.less" />
-    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
-    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
-    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
-    <Content Include="Content\bootstrap\mixins\table-row.less" />
-    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
-    <Content Include="Content\bootstrap\mixins\size.less" />
-    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
-    <Content Include="Content\bootstrap\mixins\resize.less" />
-    <Content Include="Content\bootstrap\mixins\reset-text.less" />
-    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
-    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
-    <Content Include="Content\bootstrap\mixins\panels.less" />
-    <Content Include="Content\bootstrap\mixins\pagination.less" />
-    <Content Include="Content\bootstrap\mixins\opacity.less" />
-    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
-    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
-    <Content Include="Content\bootstrap\mixins\list-group.less" />
-    <Content Include="Content\bootstrap\mixins\labels.less" />
-    <Content Include="Content\bootstrap\mixins\image.less" />
-    <Content Include="Content\bootstrap\mixins\hide-text.less" />
-    <Content Include="Content\bootstrap\mixins\grid.less" />
-    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
-    <Content Include="Content\bootstrap\mixins\gradients.less" />
-    <Content Include="Content\bootstrap\mixins\forms.less" />
-    <Content Include="Content\bootstrap\mixins\clearfix.less" />
-    <Content Include="Content\bootstrap\mixins\center-block.less" />
-    <Content Include="Content\bootstrap\mixins\buttons.less" />
-    <Content Include="Content\bootstrap\mixins\border-radius.less" />
-    <Content Include="Content\bootstrap\mixins\background-variant.less" />
-    <Content Include="Content\bootstrap\mixins\alerts.less" />
-    <Content Include="Content\bootstrap\mixins.less" />
-    <Content Include="Content\bootstrap\media.less" />
-    <Content Include="Content\bootstrap\list-group.less" />
-    <Content Include="Content\bootstrap\labels.less" />
-    <Content Include="Content\bootstrap\jumbotron.less" />
-    <Content Include="Content\bootstrap\input-groups.less" />
-    <Content Include="Content\bootstrap\grid.less" />
-    <Content Include="Content\bootstrap\glyphicons.less" />
-    <Content Include="Content\bootstrap\forms.less" />
-    <Content Include="Content\bootstrap\dropdowns.less" />
-    <Content Include="Content\bootstrap\component-animations.less" />
-    <Content Include="Content\bootstrap\code.less" />
-    <Content Include="Content\bootstrap\close.less" />
-    <Content Include="Content\bootstrap\carousel.less" />
-    <Content Include="Content\bootstrap\buttons.less" />
-    <Content Include="Content\bootstrap\button-groups.less" />
-    <Content Include="Content\bootstrap\breadcrumbs.less" />
-    <Content Include="Content\bootstrap\bootstrap.less" />
-    <Content Include="Content\bootstrap\badges.less" />
-    <Content Include="Content\bootstrap\alerts.less" />
-    <Content Include="Content\_bootstrap-datetimepicker.less" />
-    <Content Include="Content\bootstrap-datetimepicker-build.less" />
-    <None Include="Properties\PublishProfiles\mydosawebapp - Web Deploy.pubxml" />
-    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
-    <Content Include="Scripts\jquery-3.6.0.js" />
-    <Content Include="Scripts\jquery-3.6.0.min.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -790,54 +566,10 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\users\Details.cshtml" />
-    <Content Include="Views\Campus_Branches\Create.cshtml" />
-    <Content Include="Views\Campus_Branches\Delete.cshtml" />
-    <Content Include="Views\Campus_Branches\Details.cshtml" />
-    <Content Include="Views\Campus_Branches\Edit.cshtml" />
-    <Content Include="Views\Campus_Branches\Index.cshtml" />
-    <Content Include="Views\Cours\Create.cshtml" />
-    <Content Include="Views\Cours\Delete.cshtml" />
-    <Content Include="Views\Cours\Details.cshtml" />
-    <Content Include="Views\Cours\Edit.cshtml" />
-    <Content Include="Views\Cours\Index.cshtml" />
-    <Content Include="Views\Guests\Create.cshtml" />
-    <Content Include="Views\Guests\Delete.cshtml" />
-    <Content Include="Views\Guests\Details.cshtml" />
-    <Content Include="Views\Guests\Edit.cshtml" />
-    <Content Include="Views\Guests\Index.cshtml" />
-    <Content Include="Views\Roles\Create.cshtml" />
-    <Content Include="Views\Roles\Delete.cshtml" />
-    <Content Include="Views\Roles\Details.cshtml" />
-    <Content Include="Views\Roles\Edit.cshtml" />
-    <Content Include="Views\Roles\Index.cshtml" />
-    <Content Include="Views\semesters\Create.cshtml" />
-    <Content Include="Views\semesters\Delete.cshtml" />
-    <Content Include="Views\semesters\Details.cshtml" />
-    <Content Include="Views\semesters\Edit.cshtml" />
-    <Content Include="Views\semesters\Index.cshtml" />
-    <Content Include="Views\UserLocations\Create.cshtml" />
-    <Content Include="Views\UserLocations\Details.cshtml" />
-    <Content Include="Views\UserLocations\Edit.cshtml" />
-    <Content Include="Views\UserLocations\Index.cshtml" />
-    <Content Include="Views\Years\Create.cshtml" />
-    <Content Include="Views\Years\Delete.cshtml" />
-    <Content Include="Views\Years\Details.cshtml" />
-    <Content Include="Views\Years\Edit.cshtml" />
-    <Content Include="Views\Years\Index.cshtml" />
-    <Content Include="Views\Userroles\Create.cshtml" />
-    <Content Include="Views\Userroles\Delete.cshtml" />
-    <Content Include="Views\Userroles\Details.cshtml" />
-    <Content Include="Views\Userroles\Edit.cshtml" />
-    <Content Include="Views\Userroles\Index.cshtml" />
-    <Content Include="Views\users\SelfRegister.cshtml" />
-    <Content Include="Views\users\Login.cshtml" />
-    <Content Include="Views\users\verify.cshtml" />
     <Content Include="Template\assets\vendor\fonts\boxicons\boxicons.eot" />
     <Content Include="Template\assets\vendor\fonts\boxicons\boxicons.ttf" />
     <Content Include="Template\assets\vendor\fonts\boxicons\boxicons.woff" />
@@ -934,72 +666,18 @@
     <Content Include="Template\scss\_custom-variables\_support.scss" />
     <Content Include="Template\scss\_theme\_common.scss" />
     <Content Include="Template\scss\_theme\_theme.scss" />
-    <Content Include="Views\users\Users.cshtml" />
-    <Content Include="Views\users\UserInfo.cshtml" />
-    <Content Include="Views\Responses\Create.cshtml" />
-    <Content Include="Views\Responses\Delete.cshtml" />
-    <Content Include="Views\Responses\Details.cshtml" />
-    <Content Include="Views\Responses\Edit.cshtml" />
-    <Content Include="Views\Responses\Index.cshtml" />
-    <Content Include="Views\Roles\_Roles.cshtml" />
-    <Content Include="Views\Error\PageNotFound.cshtml" />
-    <Content Include="Views\Inquiries\Create.cshtml" />
-    <Content Include="Views\Inquiries\Details.cshtml" />
-    <Content Include="Views\Inquiries\Edit.cshtml" />
-    <Content Include="Views\Inquiries\Index.cshtml" />
-    <Content Include="Views\Inquiries\userResponse.cshtml" />
-    <Content Include="Views\Inquiries\userInquiries.cshtml" />
-    <Content Include="Views\Shared\adminlayout.cshtml" />
-    <Content Include="Views\Logs\Create.cshtml" />
-    <Content Include="Views\Logs\Delete.cshtml" />
-    <Content Include="Views\Logs\Details.cshtml" />
-    <Content Include="Views\Logs\Edit.cshtml" />
-    <Content Include="Views\Logs\Index.cshtml" />
-    <Content Include="Views\Events\Create.cshtml" />
-    <Content Include="Views\Events\Delete.cshtml" />
-    <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\Events\Edit.cshtml" />
-    <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Scripts\moment.min.js.map" />
-    <Content Include="Scripts\moment-with-locales.min.js.map" />
-    <Content Include="Views\Events\viewallevents.cshtml" />
-    <Content Include="Views\Events\Mycalendar.cshtml" />
-    <Content Include="Views\Events\Myshedules.cshtml" />
-    <Content Include="Views\Events\AdminDetails.cshtml" />
     <Content Include="Views\Home\Underdeveloment.cshtml" />
-    <Content Include="Views\Shared\Eventslayout.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Template\calendarscripts\" />
     <Folder Include="Views\crud\" />
     <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.esm.min.js.map" />
-    <Content Include="Scripts\bootstrap.esm.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -1043,10 +721,12 @@
     <Error Condition="!Exists('packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.props'))" />
     <Error Condition="!Exists('packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('packages\Mime.3.4.0\build\Mime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Mime.3.4.0\build\Mime.targets'))" />
   </Target>
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.targets')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="packages\Mime.3.4.0\build\Mime.targets" Condition="Exists('packages\Mime.3.4.0\build\Mime.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
